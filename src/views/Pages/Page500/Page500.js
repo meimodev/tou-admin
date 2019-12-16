@@ -10,10 +10,10 @@ class Page500 extends Component {
             <Col md="6">
               <span className="clearfix">
                 <h1 className="float-left display-3 mr-4">500</h1>
-                <h4 className="pt-3">Houston, we have a problem!</h4>
-                <p className="text-muted float-left">The page you are looking for is temporarily unavailable.</p>
+                <h4 className="pt-3">eee kyok!</h4>
+                <p className="text-muted float-left">Halaman sedang tidak tersedia, developer mungkin lelah -_-'' </p>
               </span>
-              <InputGroup className="input-prepend">
+              {/* <InputGroup className="input-prepend">
                 <InputGroupAddon addonType="prepend">
                   <InputGroupText>
                     <i className="fa fa-search"></i>
@@ -23,7 +23,7 @@ class Page500 extends Component {
                 <InputGroupAddon addonType="append">
                   <Button color="info">Search</Button>
                 </InputGroupAddon>
-              </InputGroup>
+              </InputGroup>*/}
             </Col>
           </Row>
         </Container>

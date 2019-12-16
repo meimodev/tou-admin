@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   Badge,
   Button,
@@ -17,19 +17,32 @@ import {
   DropdownToggle,
   Progress,
   Row,
-  Table
+  Table,
+  Pagination,
+  PaginationItem,
+  PaginationLink,
+  Form,
+  FormGroup,
+  Label,
+  Input
 } from "reactstrap";
+import { CustomPDFviewer } from '../CustomPDFviewer';
 
-export class WartaEdit extends Component {
+
+class TatacaraVariation extends Component {
+
   render() {
+
     return (
       <div className="animated fadeIn">
         <Row>
           <Col>
             <Card>
               <CardHeader>
-                <CardTitle>Warta Edit Page</CardTitle>
+                <h4>Page Under Construction !</h4>
+                stay tune fore more AWESEOME feature
               </CardHeader>
+             
             </Card>
           </Col>
         </Row>
@@ -37,5 +50,4 @@ export class WartaEdit extends Component {
     );
   }
 }
-
-export default WartaEdit;
+export default TatacaraVariation;

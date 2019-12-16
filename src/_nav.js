@@ -3,7 +3,7 @@ export default {
     {
       name: "Dashboard",
       url: "/dashboard",
-      icon: "fa fa-bicycle"
+      icon: "cui-home"
     },
     {
       title: true,
@@ -12,17 +12,17 @@ export default {
     {
       name: "Tentang Gereja",
       url: "/about_church",
-      icon: "fa fa-bicycle"
+      icon: "fa fa-user-o"
     },
     {
       name: "Struktur Organisasi",
       url: "/structural_org",
-      icon: "fa fa-bicycle"
+      icon: "cui-options"
     },
     {
       name: "Data Anggota",
       url: "/members_data",
-      icon: "fa fa-bicycle"
+      icon: "icon-people"
     },
     {
       title: true,
@@ -31,108 +31,101 @@ export default {
     {
       name: "Warta Jemaat",
       url: "/dashboard",
-      icon: "icon-star",
+      icon: "icon-book-open",
       children: [
         {
-          name: "Preview",
+          name: "Tinjau",
           url: "/warta/preview",
-          icon: "fa fa-bicycle"
+          icon: "cui-magnifying-glass"
         },
         {
-          name: "Edit",
-          url: "/warta/edit",
-          icon: "fa fa-thermometer-4 "
+          name: "Variasi Warta",
+          url: "/warta/variation",
+          icon: "cui-wrench",
+          badge: {
+            variant: "info",
+            text: "PRO"
+          }
         },
         {
           name: "Arsip Warta",
           url: "/warta/archive",
-          icon: "icon-star"
+          icon: "cui-layers"
         }
       ]
     },
     {
       name: "Tatacara Ibadah",
       url: "/dashboard",
-      icon: "icon-star",
+      icon: "cui-note",
       children: [
         {
           name: "Ibadah Minggu",
-          url: "/warta/review",
-          icon: "fa fa-bicycle"
+          url: "/tatacara/sunday-preview",
+          icon: "fa fa-star"
         },
         {
-          name: "Ibadah Syukur",
-          url: "/warta/edit",
-          icon: "fa fa-thermometer-4 "
+          name: "Variasi Tatacara",
+          url: "/tatacara/variation",
+          icon: "cui-wrench ",
+          badge: {
+            variant: "info",
+            text: "PRO"
+          }
         },
-        {
-          name: "Ibadah Lainnya",
-          url: "/404",
-          icon: "icon-star"
-        },
+        // {
+        //   name: "Ibadah Lainnya",
+        //   url: "/tatacara/other-preview",
+        //   icon: "icon-star"
+        // },
         {
           name: "Arsip Tatacara",
           url: "/tatacara/archive",
-          icon: "icon-star"
+          icon: "cui-layers"
         }
       ]
     },
     {
       name: "Surat-surat",
       url: "/dashboard",
-      icon: "icon-star",
-      children: [
+      icon: "icon-doc",
+      children: [ 
         {
-          name: "Surat Keterangan",
-          url: "/warta/review",
-          icon: "fa fa-bicycle"
-        },
-        {
-          name: "Surat Keputusan",
-          url: "/warta/edit",
-          icon: "fa fa-thermometer-4 "
-        },
-        {
-          name: "Surat Lainnya",
-          url: "/404",
-          icon: "icon-star"
-        },
+          name: "Variasi Surat",
+          url: "/surat/variation",
+          icon: "cui-wrench ",
+          badge: {
+            variant: "info",
+            text: "PRO"
+          }
+        }, 
         {
           name: "Arsip Surat-surat",
-          url: "/404",
-          icon: "icon-star"
-        }
-      ]
-    },
-    {
-      name: "Lainnya",
-      url: "/dashboard",
-      icon: "icon-star",
-      children: [
-        {
-          name: "Undangan",
-          url: "/warta/review",
-          icon: "fa fa-bicycle"
-        },
-        {
-          name: "Amplop",
-          url: "/warta/edit",
-          icon: "fa fa-thermometer-4 "
+          url: "/surat/archive",
+          icon: "cui-layers"
         }
       ]
     },
     // {
-    //   name: "Dashboard",
+    //   name: "Lainnya",
     //   url: "/dashboard",
-    //   icon: "icon-speedometer",
-    //   badge: {
-    //     variant: "info",
-    //     text: "NEW"
-    //   }
+    //   icon: "icon-star",
+    //   children: [
+    //     {
+    //       name: "Undangan",
+    //       url: "/warta/review",
+    //       icon: "fa fa-bicycle"
+    //     },
+    //     {
+    //       name: "Amplop",
+    //       url: "/warta/edit",
+    //       icon: "fa fa-thermometer-4 "
+    //     }
+    //   ]
     // },
     {
       title: true,
-      name: "Theme",
+      name: "======",
       wrapper: {
         // optional wrapper object
         element: "", // required valid HTML5 element tag

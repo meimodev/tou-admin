@@ -23,7 +23,7 @@ import {
   PaginationLink,
 } from "reactstrap";
 
-export class WartaArchive extends Component {
+export class SuratArchive extends Component {
   render() {
     return (
       <div className="animated fadeIn">
@@ -95,4 +95,4 @@ export class WartaArchive extends Component {
   }
 }
 
-export default WartaArchive;
+export default SuratArchive;

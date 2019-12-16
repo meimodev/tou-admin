@@ -55,15 +55,32 @@ const MainStructuralOrg = React.lazy(() =>
 const WartaPreview = React.lazy(() =>
   import("./views/TOUviews/Warta/WartaPreview")
 );
-const WartaEdit = React.lazy(() => import("./views/TOUviews/Warta/WartaEdit"));
+const WartaVariation = React.lazy(() => import("./views/TOUviews/Warta/WartaVariation"));
 const WartaArchive = React.lazy(() =>
   import("./views/TOUviews/Warta/WartaArchive")
 );
 
 // Tatacara Component
+const TatacaraSundayPreview = React.lazy(() =>
+  import("./views/TOUviews/Tatacara/TatacaraSundayPreview")
+);
 const TatacaraArchive = React.lazy(() =>
   import("./views/TOUviews/Tatacara/TatacaraArchive")
 );
+const TatacaraVariation = React.lazy(() =>
+  import("./views/TOUviews/Tatacara/TatacaraVariation")
+);
+const TatacaraOtherPreview = React.lazy(() =>
+  import("./views/TOUviews/Tatacara/TatacaraOtherPreview")
+);
+// Surat Component
+const SuratVariation = React.lazy(() =>
+  import("./views/TOUviews/Surat/SuratVariation")
+);
+const SuratArchive = React.lazy(() =>
+  import("./views/TOUviews/Surat/SuratArchive")
+);
+
 
 const Billing = React.lazy(() => import("./views/TOUviews/Billing"));
 
@@ -160,10 +177,10 @@ const routes = [
   ///////////////
   // Warta
   {
-    path: "/warta/edit",
+    path: "/warta/variation",
     exact: true,
-    name: "Warta Edit",
-    component: WartaEdit
+    name: "Warta Variation",
+    component: WartaVariation
   },
   {
     path: "/warta/preview",
@@ -182,9 +199,42 @@ const routes = [
   {
     path: "/tatacara/archive",
     exact: true,
-    name: "Warta Archive",
+    name: "Tatacara Archive",
     component: TatacaraArchive
-  }
+  },
+  {
+    path: "/tatacara/sunday-preview",
+    exact: true,
+    name: "Tatacara Sunday Preview",
+    component: TatacaraSundayPreview
+  },
+  {
+    path: "/tatacara/variation",
+    exact: true,
+    name: "Tatacara Variation",
+    component: TatacaraVariation
+  },
+  {
+    path: "/tatacara/other-preview",
+    exact: true,
+    name: "Tatacara Other Preview",
+    component: TatacaraOtherPreview
+  },
+  //////////////////////////////
+  // Surat 
+  //////////////////////////////
+  {
+    path: "/surat/archive",
+    exact: true,
+    name: "Surat Archive",
+    component: SuratArchive
+  },
+  {
+    path: "/surat/variation",
+    exact: true,
+    name: "Surat Variation",
+    component: SuratVariation
+  },
 ];
 
 export default routes;

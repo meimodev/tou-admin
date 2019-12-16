@@ -23,7 +23,10 @@ import {
 import { CustomTooltips } from "@coreui/coreui-plugin-chartjs-custom-tooltips";
 import { getStyle, hexToRgba } from "@coreui/coreui/dist/js/coreui-utilities";
 
+const Widget04 = lazy(() => import("../../views/Widgets/Widget04"));
 const Widget03 = lazy(() => import("../../views/Widgets/Widget03"));
+const Widget02 = lazy(() => import("../../views/Widgets/Widget02"));
+const Widget01 = lazy(() => import("../../views/Widgets/Widget01"));
 
 const brandPrimary = getStyle("--primary");
 const brandSuccess = getStyle("--success");
@@ -314,7 +317,7 @@ const mainChartOpts = {
     mode: "index",
     position: "nearest",
     callbacks: {
-      labelColor: function(tooltipItem, chart) {
+      labelColor: function (tooltipItem, chart) {
         return {
           backgroundColor:
             chart.data.datasets[tooltipItem.datasetIndex].borderColor
@@ -381,7 +384,7 @@ class Dashboard extends Component {
   }
 
   loading = () => (
-    <div className="animated fadeIn pt-1 text-center">Loading...</div>
+    <div className=" text-center"> <h1>This is the inner Loading... will give it a good one later -_-</h1> </div>
   );
 
   render() {
@@ -391,19 +394,275 @@ class Dashboard extends Component {
           <Col>
             <Card>
               <CardHeader>
-                <CardTitle>TTTTEESSSTTTT</CardTitle>
+                <CardTitle className="mb-1"><h4>Kabar Terbaru</h4></CardTitle>
               </CardHeader>
-
               <CardBody>
-                <CardTitle>TTTTEESSSTTTT</CardTitle>
-              </CardBody>
+                <Col>
+                  <span><strong>Hari ini</strong><span className="text-muted ml-3">Senin, 21 Oktober 2099</span> </span>
+                  <p>
+                    <Badge color="primary">Berita</Badge> <span>GEGER! di sebuah kota ada orang GEGER! yang membaca ini</span><br />
+                    <Badge color="success">Peningkatan</Badge> <span>Bug fixed: save button in android app no longer stuck</span><br />
+                    <Badge color="danger">Kesalahan</Badge> <span>System telah memblokir akses pengguna dikarenakan telah melewati jatuh tempo pembayaran</span><br />
 
-              <CardFooter>
-                <CardTitle>TTTTEESSSTTTT</CardTitle>
-              </CardFooter>
+                  </p>
+                  <hr></hr>
+                  <span><strong>Kemarin</strong><span className="text-muted ml-3">Senin, 21 Oktober 2099</span> </span>
+                  <p>
+                    <Badge color="primary">Berita</Badge> <span>GEGER! di sebuah kota ada orang GEGER! yang membaca ini</span><br />
+                    <Badge color="success">Peningkatan</Badge> <span>Bug fixed: save button in android app no longer stuck</span><br />
+                    <Badge color="warning">Peringatan</Badge> <span>Jatuh tempo pembayaran system berakhir HARI INI, segera lakukan pembayaran sebelum pukul 00.00 WITA untuk menghindari pemblokiran sitem </span><br />
+
+                  </p>
+                  <hr></hr>
+                  <span><strong>2 Hari Yang Lalu</strong><span className="text-muted ml-3">Senin, 21 Oktober 2099</span> </span>
+                  <p>
+                    <Badge color="primary">Berita</Badge> <span>GEGER! di sebuah kota ada orang GEGER! yang membaca ini</span><br />
+                    <Badge color="success">Peningkatan</Badge> <span>1 News something</span><br />
+                  </p>
+                  <hr></hr>
+
+                </Col>
+              </CardBody>
             </Card>
           </Col>
+
         </Row>
+
+        <Row>
+          <Col>
+            <Card>
+
+              <CardHeader>
+                <CardTitle className="mb-0"><h4>Tentang Gereja</h4></CardTitle>
+              </CardHeader>
+
+              <CardBody >
+                <Row>
+                  <Col sm="6">
+                    <div className="">
+                      <span className="text-muted"> Nama Jemaat </span><br />
+                      <p className=""> Bait-el </p>
+                    </div>
+
+                    <div>
+                      <span className="text-muted"> Telepon </span><br />
+                      <p className="mt-0"> +62 852 1234 4213 </p>
+                    </div>
+                    <div>
+                      <span className="text-muted"> Email </span><br />
+                      <p className="mt-0"> bait-elrambo@tou.com </p>
+                    </div>
+
+                    <div className="">
+                      <span className="text-muted"> Kabupaten / Kota </span><br />
+                      <p className="mt-0"> Majemba </p>
+                    </div>
+                    <div>
+                      <span className="text-muted"> Kecamatan </span><br />
+                      <p className="mt-0"> Kyoki </p>
+                    </div>
+                    <div>
+                      <span className="text-muted"> Kelurahan / Desa </span><br />
+                      <p className="mt-0"> Rambo </p>
+                    </div>
+                    <div>
+                      <span className="text-muted"> Alamat </span><br />
+                      <p className="mt-0"> Jln. Rambo-rambo, No 186 (depan jembatan joni) </p>
+                    </div>
+
+                  </Col>
+                  <Col sm="6">
+
+                    <ul className="pl-0 ">
+
+                      <div className="progress-group">
+                        <div className="progress-group-header">
+                          <i className="icon-user progress-group-icon" />
+                          <span className="title text-muted">Laki-laki</span>
+                          <span className="ml-auto font-weight-bold mr-1">1.245</span>
+                          <span className="text-muted small">(60%)</span>
+
+                        </div>
+                        <div className="progress-group-bars">
+                          <Progress
+                            className="progress-xs"
+                            color="primary"
+                            value="60"
+                          />
+                        </div>
+                      </div>
+                      <div className="progress-group mb-4">
+                        <div className="progress-group-header">
+                          <i className="icon-user-female progress-group-icon" />
+                          <span className="title text-muted">Perempuan</span>
+                          <span className="ml-auto font-weight-bold mr-1">1.245</span>
+                          <span className="text-muted small">(15%)</span>
+                        </div>
+                        <div className="progress-group-bars">
+                          <Progress
+                            className="progress-xs"
+                            color="primary"
+                            value="15"
+                          />
+                        </div>
+                      </div>
+                      <hr className="mt-0" />
+
+                      <div className="progress-group">
+                        <div className="progress-group-header">
+                          <i className="icon-globe progress-group-icon" />
+                          <span className="title text-muted">Pria / Kaum Bapa</span>
+                          <span className="ml-auto font-weight-bold">
+                            191,235{" "}
+                            <span className="text-muted small">(56%)</span>
+                          </span>
+                        </div>
+                        <div className="progress-group-bars">
+                          <Progress
+                            className="progress-xs"
+                            color="danger"
+                            value="56"
+                          />
+                        </div>
+                      </div>
+                      <div className="progress-group">
+                        <div className="progress-group-header">
+                          <i className="icon-social-facebook progress-group-icon" />
+                          <span className="title text-muted">Wanita / Kaum Bapa</span>
+                          <span className="ml-auto font-weight-bold">
+                            51,223{" "}
+                            <span className="text-muted small">(15%)</span>
+                          </span>
+                        </div>
+                        <div className="progress-group-bars">
+                          <Progress
+                            className="progress-xs"
+                            color="danger"
+                            value="15"
+                          />
+                        </div>
+                      </div>
+                      <div className="progress-group">
+                        <div className="progress-group-header">
+                          <i className="icon-social-twitter progress-group-icon" />
+                          <span className="title text-muted">Pemuda</span>
+                          <span className="ml-auto font-weight-bold">
+                            37,564{" "}
+                            <span className="text-muted small">(11%)</span>
+                          </span>
+                        </div>
+                        <div className="progress-group-bars">
+                          <Progress
+                            className="progress-xs"
+                            color="danger"
+                            value="11"
+                          />
+                        </div>
+                      </div>
+                      <div className="progress-group">
+                        <div className="progress-group-header">
+                          <i className="icon-social-linkedin progress-group-icon" />
+                          <span className="title text-muted">Remaja</span>
+                          <span className="ml-auto font-weight-bold">
+                            27,319{" "}
+                            <span className="text-muted small">(8%)</span>
+                          </span>
+                        </div>
+                        <div className="progress-group-bars">
+                          <Progress
+                            className="progress-xs"
+                            color="danger"
+                            value="8"
+                          />
+                        </div>
+                      </div>
+                      <div className="progress-group mb-4">
+                        <div className="progress-group-header">
+                          <i className="icon-social-linkedin progress-group-icon" />
+                          <span className="title text-muted">Anak</span>
+                          <span className="ml-auto font-weight-bold">
+                            27,319{" "}
+                            <span className="text-muted small">(8%)</span>
+                          </span>
+                        </div>
+                        <div className="progress-group-bars">
+                          <Progress
+                            className="progress-xs"
+                            color="danger"
+                            value="8"
+                          />
+                        </div>
+                      </div>
+
+                      <hr className="mt-0" />
+                      <div className="divider text-center">
+                        <Row>
+                          <Col sm={12} md className="mb-sm-2 mb-0">
+                            <div className="text-muted">Baptis</div>
+                            <strong>1.242</strong><span className="text-muted pl-1">(40%)</span>
+                            <Progress
+                              className="progress-xs mt-2"
+                              color="info"
+                              value="40"
+                            />
+                          </Col>
+                          <Col sm={12} md className="mb-sm-2 mb-0">
+                            <div className="text-muted">Sidi</div>
+                            <strong>255</strong><span className="text-muted pl-1">(70%)</span>
+                            <Progress
+                              className="progress-xs mt-2"
+                              color="info"
+                              value="70"
+                            />
+                          </Col>
+                          <Col sm={12} md className="mb-sm-2 mb-0">
+                            <div className="text-muted">Nikah</div>
+                            <strong>214</strong><span className="text-muted pl-1">(15%)</span>
+                            <Progress
+                              className="progress-xs mt-2"
+                              color="info"
+                              value="15"
+                            />
+                          </Col>
+                          <Col sm={12} sm className="mb-sm-2 mb-0 my-auto">
+                            <div className="border p-2 rounded-lg color-primary bg-info">
+                              <div>TOTAL</div>
+                              <strong>29.703</strong>
+                            </div>
+
+                          </Col>
+                        </Row>
+                      </div>
+                    </ul>
+
+                  </Col>
+                </Row>
+              </CardBody>
+
+            </Card>
+          </Col>
+
+        </Row>
+
+        <Row>
+          <Col sm="3">
+            <Widget02 header="Custumer Service" mainText="+62 812 9402" icon="icon-phone" color="secondary" variant="1" />
+          </Col>
+
+          <Col sm="3">
+            <Widget02 header="WhatsApp" mainText="+62 812 9402" icon="fa fa-whatsapp" color="success" variant="1" />
+          </Col>
+
+          <Col sm="3">
+            <Widget02 header="Instagram" mainText="@meimo.dev" icon="fa fa-instagram" color="danger" variant="1" />
+          </Col>
+
+          <Col sm="3">
+            <Widget02 header="Website" mainText="www.meimodev.com" icon="fa fa-globe" color="warning" variant="1" />
+          </Col>
+        </Row>
+
+        {/* 
         <Row>
           <Col>
             <Card>
@@ -1250,7 +1509,8 @@ class Dashboard extends Component {
               </CardBody>
             </Card>
           </Col>
-        </Row>
+        </Row> */}
+
       </div>
     );
   }
