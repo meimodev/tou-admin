@@ -48,7 +48,7 @@ export class CustomPDFviewer extends Component {
                 <span className="my-auto"><i className="cui-ban text-danger pr-2"/> Terjadi kesalahan silahkan muat ulang halaman</span>
 
                 <div className="alert alert-warning mt-2" role="alert">
-                    <i className="cui-lightbulb"/> jika anda menggunakan integrasi IDM (Internet download manager) file akan otomatis terdownload ! <br/>
+                    <i className="cui-lightbulb"/> jika anda menggunakan integrasi IDM (Internet download manager) file akan otomatis terdownload! <br/>
                     jika anda ingin menggunakan fitur bawaan system, silahkan blokir download otomatis di IDM untuk website ini
                 </div>
 
