@@ -1,10 +1,16 @@
-import React, { Component } from 'react';
-import { HashRouter, Route, Switch } from 'react-router-dom';
+import React, {Component} from 'react';
+import {HashRouter, Route, Switch} from 'react-router-dom';
 // import { renderRoutes } from 'react-router-config';
 import './App.scss';
 
-
-const loading = () => <div><h1>This is the Loading screen will fix this later bro ... -_-' </h1></div>;
+const loading = () =>
+    <div>
+        <div className="animated fadeIn pt-1 text-center my-auto">
+            <div className="spinner-border text-primary" role="status">
+                <span className="sr-only">Sedang Memuat ...</span>
+            </div>
+        </div>
+    </div>;
 
 // Containers
 const DefaultLayout = React.lazy(() => import('./containers/DefaultLayout'));
@@ -17,21 +23,21 @@ const Page500 = React.lazy(() => import('./views/Pages/Page500'));
 
 class App extends Component {
 
-  render() {
-    return (
-      <HashRouter>
-          <React.Suspense fallback={loading()}>
-            <Switch>
-              <Route exact path="/login" name="Login Page" render={props => <Login {...props}/>} />
-              <Route exact path="/register" name="Register Page" render={props => <Register {...props}/>} />
-              <Route exact path="/404" name="Page 404" render={props => <Page404 {...props}/>} />
-              <Route exact path="/500" name="Page 500" render={props => <Page500 {...props}/>} />
-              <Route path="/" name="Home" render={props => <DefaultLayout {...props}/>} />
-            </Switch>
-          </React.Suspense>
-      </HashRouter>
-    );
-  }
+    render() {
+        return (
+            <HashRouter>
+                <React.Suspense fallback={loading()}>
+                    <Switch>
+                        <Route exact path="/login" name="Login Page" render={props => <Login {...props}/>}/>
+                        <Route exact path="/register" name="Register Page" render={props => <Register {...props}/>}/>
+                        <Route exact path="/404" name="Page 404" render={props => <Page404 {...props}/>}/>
+                        <Route exact path="/500" name="Page 500" render={props => <Page500 {...props}/>}/>
+                        <Route path="/" name="Home" render={props => <DefaultLayout {...props}/>}/>
+                    </Switch>
+                </React.Suspense>
+            </HashRouter>
+        );
+    }
 }
 
 export default App;

@@ -35,27 +35,36 @@ export class CustomPDFviewer extends Component {
         loadSuccess: false,
         numPages: 0,
         pageNumber: 1
-    }
+    };
 
     onDocumentLoadSuccess = ({ numPages }) => {
 
         this.setState({ numPages, pageNumber: 1, loadSuccess: true });
-    }
+    };
     onRenderError = () => {
         return (
-            <h5 className="my-auto">Terjadi kesalahan silahkan muat ulang halaman</h5>
-        )
-    }
+            <div className="animated fadeIn p-4 text-center my-auto">
+                <span className="my-auto">-_-' Terjadi kesalahan silahkan muat ulang halaman</span>
+            </div>        )
+    };
     onLoadingDocument = () => {
         return (
-            <h5 className="my-auto">Memuat ...</h5>
+            <div className="animated fadeIn p-4 text-center my-auto">
+                <div className="spinner-border text-primary" role="status">
+                    <span className="sr-only">Sedang Memuat ...</span>
+                </div>
+            </div>
         )
-    }
+    };
     onLoadingPage = () => {
         return (
-            <h5 className="my-auto">Memnuat ...</h5>
-        )
-    }
+            <div className="animated fadeIn p-4 text-center my-auto">
+                <div className="spinner-border text-primary" role="status">
+                    <span className="sr-only">Sedang Memuat ...</span>
+
+                </div>
+            </div>        )
+    };
 
 
     nextPage = () => {
@@ -72,7 +81,7 @@ export class CustomPDFviewer extends Component {
         this.setState({
             pageNumber: nextPageNumber
         });
-    }
+    };
 
     prevPage = () => {
         const currentPageNumber = this.state.pageNumber;
@@ -87,11 +96,11 @@ export class CustomPDFviewer extends Component {
         this.setState({
             pageNumber: prevPageNumber
         });
-    }
+    };
 
     render() {
         const { pageNumber, numPages } = this.state;
-        const { fileUrl, powerPointUrl } = this.props
+        const { fileUrl, powerPointUrl } = this.props;
         return (
             <div className="">
                 {this.state.loadSuccess ?

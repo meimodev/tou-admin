@@ -34,7 +34,7 @@ export class Main_AboutChurch extends Component {
             <Card>
               <CardHeader>
                 <CardTitle>
-                  <h4>Tentang Gereja</h4>
+                  <h4>Tentang Gereja test</h4>
                 </CardTitle>
               </CardHeader>
               <CardBody>

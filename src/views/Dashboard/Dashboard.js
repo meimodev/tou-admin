@@ -1,27 +1,27 @@
-import React, { Component, lazy, Suspense } from "react";
-import { Bar, Line } from "react-chartjs-2";
+import React, {Component, lazy, Suspense} from "react";
+import {Bar, Line} from "react-chartjs-2";
 import {
-  Badge,
-  Button,
-  ButtonDropdown,
-  ButtonGroup,
-  ButtonToolbar,
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-  Col,
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownToggle,
-  Progress,
-  Row,
-  Table
+    Badge,
+    Button,
+    ButtonDropdown,
+    ButtonGroup,
+    ButtonToolbar,
+    Card,
+    CardBody,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+    Col,
+    Dropdown,
+    DropdownItem,
+    DropdownMenu,
+    DropdownToggle,
+    Progress,
+    Row,
+    Table
 } from "reactstrap";
-import { CustomTooltips } from "@coreui/coreui-plugin-chartjs-custom-tooltips";
-import { getStyle, hexToRgba } from "@coreui/coreui/dist/js/coreui-utilities";
+import {CustomTooltips} from "@coreui/coreui-plugin-chartjs-custom-tooltips";
+import {getStyle, hexToRgba} from "@coreui/coreui/dist/js/coreui-utilities";
 
 const Widget04 = lazy(() => import("../../views/Widgets/Widget04"));
 const Widget03 = lazy(() => import("../../views/Widgets/Widget03"));
@@ -36,206 +36,206 @@ const brandDanger = getStyle("--danger");
 
 // Card Chart 1
 const cardChartData1 = {
-  labels: ["January", "February", "March", "April", "May", "June", "July"],
-  datasets: [
-    {
-      label: "My First dataset",
-      backgroundColor: brandPrimary,
-      borderColor: "rgba(255,255,255,.55)",
-      data: [65, 59, 84, 84, 51, 55, 40]
-    }
-  ]
+    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    datasets: [
+        {
+            label: "My First dataset",
+            backgroundColor: brandPrimary,
+            borderColor: "rgba(255,255,255,.55)",
+            data: [65, 59, 84, 84, 51, 55, 40]
+        }
+    ]
 };
 
 // Card Chart 2
 const cardChartData2 = {
-  labels: ["January", "February", "March", "April", "May", "June", "July"],
-  datasets: [
-    {
-      label: "My First dataset",
-      backgroundColor: brandInfo,
-      borderColor: "rgba(255,255,255,.55)",
-      data: [1, 18, 9, 17, 34, 22, 11]
-    }
-  ]
+    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    datasets: [
+        {
+            label: "My First dataset",
+            backgroundColor: brandInfo,
+            borderColor: "rgba(255,255,255,.55)",
+            data: [1, 18, 9, 17, 34, 22, 11]
+        }
+    ]
 };
 
 // Card Chart 3
 const cardChartData3 = {
-  labels: ["January", "February", "March", "April", "May", "June", "July"],
-  datasets: [
-    {
-      label: "My First dataset",
-      backgroundColor: "rgba(255,255,255,.2)",
-      borderColor: "rgba(255,255,255,.55)",
-      data: [78, 81, 80, 45, 34, 12, 40]
-    }
-  ]
+    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    datasets: [
+        {
+            label: "My First dataset",
+            backgroundColor: "rgba(255,255,255,.2)",
+            borderColor: "rgba(255,255,255,.55)",
+            data: [78, 81, 80, 45, 34, 12, 40]
+        }
+    ]
 };
 
 // Card Chart 4
 const cardChartData4 = {
-  labels: ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
-  datasets: [
-    {
-      label: "My First dataset",
-      backgroundColor: "rgba(255,255,255,.3)",
-      borderColor: "transparent",
-      data: [78, 81, 80, 45, 34, 12, 40, 75, 34, 89, 32, 68, 54, 72, 18, 98]
-    }
-  ]
+    labels: ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+    datasets: [
+        {
+            label: "My First dataset",
+            backgroundColor: "rgba(255,255,255,.3)",
+            borderColor: "transparent",
+            data: [78, 81, 80, 45, 34, 12, 40, 75, 34, 89, 32, 68, 54, 72, 18, 98]
+        }
+    ]
 };
 
 // Social Box Chart
 const socialBoxData = [
-  { data: [65, 59, 84, 84, 51, 55, 40], label: "facebook" },
-  { data: [1, 13, 9, 17, 34, 41, 38], label: "twitter" },
-  { data: [78, 81, 80, 45, 34, 12, 40], label: "linkedin" },
-  { data: [35, 23, 56, 22, 97, 23, 64], label: "google" }
+    {data: [65, 59, 84, 84, 51, 55, 40], label: "facebook"},
+    {data: [1, 13, 9, 17, 34, 41, 38], label: "twitter"},
+    {data: [78, 81, 80, 45, 34, 12, 40], label: "linkedin"},
+    {data: [35, 23, 56, 22, 97, 23, 64], label: "google"}
 ];
 
 const makeSocialBoxData = dataSetNo => {
-  const dataset = socialBoxData[dataSetNo];
-  const data = {
-    labels: ["January", "February", "March", "April", "May", "June", "July"],
-    datasets: [
-      {
-        backgroundColor: "rgba(255,255,255,.1)",
-        borderColor: "rgba(255,255,255,.55)",
-        pointHoverBackgroundColor: "#fff",
-        borderWidth: 2,
-        data: dataset.data,
-        label: dataset.label
-      }
-    ]
-  };
-  return () => data;
+    const dataset = socialBoxData[dataSetNo];
+    const data = {
+        labels: ["January", "February", "March", "April", "May", "June", "July"],
+        datasets: [
+            {
+                backgroundColor: "rgba(255,255,255,.1)",
+                borderColor: "rgba(255,255,255,.55)",
+                pointHoverBackgroundColor: "#fff",
+                borderWidth: 2,
+                data: dataset.data,
+                label: dataset.label
+            }
+        ]
+    };
+    return () => data;
 };
 
 const socialChartOpts = {
-  tooltips: {
-    enabled: false,
-    custom: CustomTooltips
-  },
-  responsive: true,
-  maintainAspectRatio: false,
-  legend: {
-    display: false
-  },
-  scales: {
-    xAxes: [
-      {
+    tooltips: {
+        enabled: false,
+        custom: CustomTooltips
+    },
+    responsive: true,
+    maintainAspectRatio: false,
+    legend: {
         display: false
-      }
-    ],
-    yAxes: [
-      {
-        display: false
-      }
-    ]
-  },
-  elements: {
-    point: {
-      radius: 0,
-      hitRadius: 10,
-      hoverRadius: 4,
-      hoverBorderWidth: 3
+    },
+    scales: {
+        xAxes: [
+            {
+                display: false
+            }
+        ],
+        yAxes: [
+            {
+                display: false
+            }
+        ]
+    },
+    elements: {
+        point: {
+            radius: 0,
+            hitRadius: 10,
+            hoverRadius: 4,
+            hoverBorderWidth: 3
+        }
     }
-  }
 };
 
 // sparkline charts
 const sparkLineChartData = [
-  {
-    data: [35, 23, 56, 22, 97, 23, 64],
-    label: "New Clients"
-  },
-  {
-    data: [65, 59, 84, 84, 51, 55, 40],
-    label: "Recurring Clients"
-  },
-  {
-    data: [35, 23, 56, 22, 97, 23, 64],
-    label: "Pageviews"
-  },
-  {
-    data: [65, 59, 84, 84, 51, 55, 40],
-    label: "Organic"
-  },
-  {
-    data: [78, 81, 80, 45, 34, 12, 40],
-    label: "CTR"
-  },
-  {
-    data: [1, 13, 9, 17, 34, 41, 38],
-    label: "Bounce Rate"
-  }
+    {
+        data: [35, 23, 56, 22, 97, 23, 64],
+        label: "New Clients"
+    },
+    {
+        data: [65, 59, 84, 84, 51, 55, 40],
+        label: "Recurring Clients"
+    },
+    {
+        data: [35, 23, 56, 22, 97, 23, 64],
+        label: "Pageviews"
+    },
+    {
+        data: [65, 59, 84, 84, 51, 55, 40],
+        label: "Organic"
+    },
+    {
+        data: [78, 81, 80, 45, 34, 12, 40],
+        label: "CTR"
+    },
+    {
+        data: [1, 13, 9, 17, 34, 41, 38],
+        label: "Bounce Rate"
+    }
 ];
 
 const makeSparkLineData = (dataSetNo, variant) => {
-  const dataset = sparkLineChartData[dataSetNo];
-  const data = {
-    labels: [
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-      "Sunday"
-    ],
-    datasets: [
-      {
-        backgroundColor: "transparent",
-        borderColor: variant ? variant : "#c2cfd6",
-        data: dataset.data,
-        label: dataset.label
-      }
-    ]
-  };
-  return () => data;
+    const dataset = sparkLineChartData[dataSetNo];
+    const data = {
+        labels: [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        datasets: [
+            {
+                backgroundColor: "transparent",
+                borderColor: variant ? variant : "#c2cfd6",
+                data: dataset.data,
+                label: dataset.label
+            }
+        ]
+    };
+    return () => data;
 };
 
 const sparklineChartOpts = {
-  tooltips: {
-    enabled: false,
-    custom: CustomTooltips
-  },
-  responsive: true,
-  maintainAspectRatio: true,
-  scales: {
-    xAxes: [
-      {
-        display: false
-      }
-    ],
-    yAxes: [
-      {
-        display: false
-      }
-    ]
-  },
-  elements: {
-    line: {
-      borderWidth: 2
+    tooltips: {
+        enabled: false,
+        custom: CustomTooltips
     },
-    point: {
-      radius: 0,
-      hitRadius: 10,
-      hoverRadius: 4,
-      hoverBorderWidth: 3
+    responsive: true,
+    maintainAspectRatio: true,
+    scales: {
+        xAxes: [
+            {
+                display: false
+            }
+        ],
+        yAxes: [
+            {
+                display: false
+            }
+        ]
+    },
+    elements: {
+        line: {
+            borderWidth: 2
+        },
+        point: {
+            radius: 0,
+            hitRadius: 10,
+            hoverRadius: 4,
+            hoverBorderWidth: 3
+        }
+    },
+    legend: {
+        display: false
     }
-  },
-  legend: {
-    display: false
-  }
 };
 
 // Main Chart
 
 //Random Numbers
 function random(min, max) {
-  return Math.floor(Math.random() * (max - min + 1) + min);
+    return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 var elements = 27;
@@ -244,425 +244,434 @@ var data2 = [];
 var data3 = [];
 
 for (var i = 0; i <= elements; i++) {
-  data1.push(random(50, 200));
-  data2.push(random(80, 100));
-  data3.push(65);
+    data1.push(random(50, 200));
+    data2.push(random(80, 100));
+    data3.push(65);
 }
 
 const mainChart = {
-  labels: [
-    "Mo",
-    "Tu",
-    "We",
-    "Th",
-    "Fr",
-    "Sa",
-    "Su",
-    "Mo",
-    "Tu",
-    "We",
-    "Th",
-    "Fr",
-    "Sa",
-    "Su",
-    "Mo",
-    "Tu",
-    "We",
-    "Th",
-    "Fr",
-    "Sa",
-    "Su",
-    "Mo",
-    "Tu",
-    "We",
-    "Th",
-    "Fr",
-    "Sa",
-    "Su"
-  ],
-  datasets: [
-    {
-      label: "My First dataset",
-      backgroundColor: hexToRgba(brandInfo, 10),
-      borderColor: brandInfo,
-      pointHoverBackgroundColor: "#fff",
-      borderWidth: 2,
-      data: data1
-    },
-    {
-      label: "My Second dataset",
-      backgroundColor: "transparent",
-      borderColor: brandSuccess,
-      pointHoverBackgroundColor: "#fff",
-      borderWidth: 2,
-      data: data2
-    },
-    {
-      label: "My Third dataset",
-      backgroundColor: "transparent",
-      borderColor: brandDanger,
-      pointHoverBackgroundColor: "#fff",
-      borderWidth: 1,
-      borderDash: [8, 5],
-      data: data3
-    }
-  ]
+    labels: [
+        "Mo",
+        "Tu",
+        "We",
+        "Th",
+        "Fr",
+        "Sa",
+        "Su",
+        "Mo",
+        "Tu",
+        "We",
+        "Th",
+        "Fr",
+        "Sa",
+        "Su",
+        "Mo",
+        "Tu",
+        "We",
+        "Th",
+        "Fr",
+        "Sa",
+        "Su",
+        "Mo",
+        "Tu",
+        "We",
+        "Th",
+        "Fr",
+        "Sa",
+        "Su"
+    ],
+    datasets: [
+        {
+            label: "My First dataset",
+            backgroundColor: hexToRgba(brandInfo, 10),
+            borderColor: brandInfo,
+            pointHoverBackgroundColor: "#fff",
+            borderWidth: 2,
+            data: data1
+        },
+        {
+            label: "My Second dataset",
+            backgroundColor: "transparent",
+            borderColor: brandSuccess,
+            pointHoverBackgroundColor: "#fff",
+            borderWidth: 2,
+            data: data2
+        },
+        {
+            label: "My Third dataset",
+            backgroundColor: "transparent",
+            borderColor: brandDanger,
+            pointHoverBackgroundColor: "#fff",
+            borderWidth: 1,
+            borderDash: [8, 5],
+            data: data3
+        }
+    ]
 };
 
 const mainChartOpts = {
-  tooltips: {
-    enabled: false,
-    custom: CustomTooltips,
-    intersect: true,
-    mode: "index",
-    position: "nearest",
-    callbacks: {
-      labelColor: function (tooltipItem, chart) {
-        return {
-          backgroundColor:
-            chart.data.datasets[tooltipItem.datasetIndex].borderColor
-        };
-      }
-    }
-  },
-  maintainAspectRatio: false,
-  legend: {
-    display: false
-  },
-  scales: {
-    xAxes: [
-      {
-        gridLines: {
-          drawOnChartArea: false
+    tooltips: {
+        enabled: false,
+        custom: CustomTooltips,
+        intersect: true,
+        mode: "index",
+        position: "nearest",
+        callbacks: {
+            labelColor: function (tooltipItem, chart) {
+                return {
+                    backgroundColor:
+                    chart.data.datasets[tooltipItem.datasetIndex].borderColor
+                };
+            }
         }
-      }
-    ],
-    yAxes: [
-      {
-        ticks: {
-          beginAtZero: true,
-          maxTicksLimit: 5,
-          stepSize: Math.ceil(250 / 5),
-          max: 250
+    },
+    maintainAspectRatio: false,
+    legend: {
+        display: false
+    },
+    scales: {
+        xAxes: [
+            {
+                gridLines: {
+                    drawOnChartArea: false
+                }
+            }
+        ],
+        yAxes: [
+            {
+                ticks: {
+                    beginAtZero: true,
+                    maxTicksLimit: 5,
+                    stepSize: Math.ceil(250 / 5),
+                    max: 250
+                }
+            }
+        ]
+    },
+    elements: {
+        point: {
+            radius: 0,
+            hitRadius: 10,
+            hoverRadius: 4,
+            hoverBorderWidth: 3
         }
-      }
-    ]
-  },
-  elements: {
-    point: {
-      radius: 0,
-      hitRadius: 10,
-      hoverRadius: 4,
-      hoverBorderWidth: 3
     }
-  }
 };
 
 class Dashboard extends Component {
-  constructor(props) {
-    super(props);
+    constructor(props) {
+        super(props);
 
-    this.toggle = this.toggle.bind(this);
-    this.onRadioBtnClick = this.onRadioBtnClick.bind(this);
+        this.toggle = this.toggle.bind(this);
+        this.onRadioBtnClick = this.onRadioBtnClick.bind(this);
 
-    this.state = {
-      dropdownOpen: false,
-      radioSelected: 2
-    };
-  }
+        this.state = {
+            dropdownOpen: false,
+            radioSelected: 2
+        };
+    }
 
-  toggle() {
-    this.setState({
-      dropdownOpen: !this.state.dropdownOpen
-    });
-  }
+    toggle() {
+        this.setState({
+            dropdownOpen: !this.state.dropdownOpen
+        });
+    }
 
-  onRadioBtnClick(radioSelected) {
-    this.setState({
-      radioSelected: radioSelected
-    });
-  }
+    onRadioBtnClick(radioSelected) {
+        this.setState({
+            radioSelected: radioSelected
+        });
+    }
 
-  loading = () => (
-    <div className=" text-center"> <h1>This is the inner Loading... will give it a good one later -_-</h1> </div>
-  );
+    loading = () => (
+        <div className=" text-center"><h1>This is the inner Loading... will give it a good one later -_-</h1></div>
+    );
 
-  render() {
-    return (
-      <div className="animated fadeIn">
-        <Row>
-          <Col>
-            <Card>
-              <CardHeader>
-                <CardTitle className="mb-1"><h4>Kabar Terbaru</h4></CardTitle>
-              </CardHeader>
-              <CardBody>
-                <Col>
-                  <span><strong>Hari ini</strong><span className="text-muted ml-3">Senin, 21 Oktober 2099</span> </span>
-                  <p>
-                    <Badge color="primary">Berita</Badge> <span>GEGER! di sebuah kota ada orang GEGER! yang membaca ini</span><br />
-                    <Badge color="success">Peningkatan</Badge> <span>Bug fixed: save button in android app no longer stuck</span><br />
-                    <Badge color="danger">Kesalahan</Badge> <span>System telah memblokir akses pengguna dikarenakan telah melewati jatuh tempo pembayaran</span><br />
-
-                  </p>
-                  <hr></hr>
-                  <span><strong>Kemarin</strong><span className="text-muted ml-3">Senin, 21 Oktober 2099</span> </span>
-                  <p>
-                    <Badge color="primary">Berita</Badge> <span>GEGER! di sebuah kota ada orang GEGER! yang membaca ini</span><br />
-                    <Badge color="success">Peningkatan</Badge> <span>Bug fixed: save button in android app no longer stuck</span><br />
-                    <Badge color="warning">Peringatan</Badge> <span>Jatuh tempo pembayaran system berakhir HARI INI, segera lakukan pembayaran sebelum pukul 00.00 WITA untuk menghindari pemblokiran sitem </span><br />
-
-                  </p>
-                  <hr></hr>
-                  <span><strong>2 Hari Yang Lalu</strong><span className="text-muted ml-3">Senin, 21 Oktober 2099</span> </span>
-                  <p>
-                    <Badge color="primary">Berita</Badge> <span>GEGER! di sebuah kota ada orang GEGER! yang membaca ini</span><br />
-                    <Badge color="success">Peningkatan</Badge> <span>1 News something</span><br />
-                  </p>
-                  <hr></hr>
-
-                </Col>
-              </CardBody>
-            </Card>
-          </Col>
-
-        </Row>
-
-        <Row>
-          <Col>
-            <Card>
-
-              <CardHeader>
-                <CardTitle className="mb-0"><h4>Tentang Gereja</h4></CardTitle>
-              </CardHeader>
-
-              <CardBody >
+    render() {
+        return (
+            <div className="animated fadeIn">
                 <Row>
-                  <Col sm="6">
-                    <div className="">
-                      <span className="text-muted"> Nama Jemaat </span><br />
-                      <p className=""> Bait-el </p>
-                    </div>
+                    <Col>
+                        <Suspense fallback={this.loading()}>
+                            <Card>
+                                <CardHeader>
+                                    <CardTitle className="mb-1"><h4>Kabar Terbaru</h4></CardTitle>
+                                </CardHeader>
+                                <CardBody>
+                                    <Col>
+                                        <span><strong>Hari ini</strong><span className="text-muted ml-3">Senin, 21 Oktober 2099</span> </span>
+                                        <p>
+                                            <Badge color="primary">Berita</Badge> <span>GEGER! di sebuah kota ada orang GEGER! yang membaca ini</span><br/>
+                                            <Badge color="success">Peningkatan</Badge> <span>Bug fixed: save button in android app no longer stuck</span><br/>
+                                            <Badge color="danger">Kesalahan</Badge> <span>System telah memblokir akses pengguna dikarenakan telah melewati jatuh tempo pembayaran</span><br/>
 
-                    <div>
-                      <span className="text-muted"> Telepon </span><br />
-                      <p className="mt-0"> +62 852 1234 4213 </p>
-                    </div>
-                    <div>
-                      <span className="text-muted"> Email </span><br />
-                      <p className="mt-0"> bait-elrambo@tou.com </p>
-                    </div>
+                                        </p>
+                                        <hr/>
+                                        <span><strong>Kemarin</strong><span className="text-muted ml-3">Senin, 21 Oktober 2099</span> </span>
+                                        <p>
+                                            <Badge color="primary">Berita</Badge> <span>GEGER! di sebuah kota ada orang GEGER! yang membaca ini</span><br/>
+                                            <Badge color="success">Peningkatan</Badge> <span>Bug fixed: save button in android app no longer stuck</span><br/>
+                                            <Badge color="warning">Peringatan</Badge> <span>Jatuh tempo pembayaran system berakhir HARI INI, segera lakukan pembayaran sebelum pukul 00.00 WITA untuk menghindari pemblokiran sitem </span><br/>
 
-                    <div className="">
-                      <span className="text-muted"> Kabupaten / Kota </span><br />
-                      <p className="mt-0"> Majemba </p>
-                    </div>
-                    <div>
-                      <span className="text-muted"> Kecamatan </span><br />
-                      <p className="mt-0"> Kyoki </p>
-                    </div>
-                    <div>
-                      <span className="text-muted"> Kelurahan / Desa </span><br />
-                      <p className="mt-0"> Rambo </p>
-                    </div>
-                    <div>
-                      <span className="text-muted"> Alamat </span><br />
-                      <p className="mt-0"> Jln. Rambo-rambo, No 186 (depan jembatan joni) </p>
-                    </div>
+                                        </p>
+                                        <hr/>
+                                        <span><strong>2 Hari Yang Lalu</strong><span className="text-muted ml-3">Senin, 21 Oktober 2099</span> </span>
+                                        <p>
+                                            <Badge color="primary">Berita</Badge> <span>GEGER! di sebuah kota ada orang GEGER! yang membaca ini</span><br/>
+                                            <Badge color="success">Peningkatan</Badge>
+                                            <span>1 News something</span><br/>
+                                        </p>
+                                        <hr/>
 
-                  </Col>
-                  <Col sm="6">
-
-                    <ul className="pl-0 ">
-
-                      <div className="progress-group">
-                        <div className="progress-group-header">
-                          <i className="icon-user progress-group-icon" />
-                          <span className="title text-muted">Laki-laki</span>
-                          <span className="ml-auto font-weight-bold mr-1">1.245</span>
-                          <span className="text-muted small">(60%)</span>
-
-                        </div>
-                        <div className="progress-group-bars">
-                          <Progress
-                            className="progress-xs"
-                            color="primary"
-                            value="60"
-                          />
-                        </div>
-                      </div>
-                      <div className="progress-group mb-4">
-                        <div className="progress-group-header">
-                          <i className="icon-user-female progress-group-icon" />
-                          <span className="title text-muted">Perempuan</span>
-                          <span className="ml-auto font-weight-bold mr-1">1.245</span>
-                          <span className="text-muted small">(15%)</span>
-                        </div>
-                        <div className="progress-group-bars">
-                          <Progress
-                            className="progress-xs"
-                            color="primary"
-                            value="15"
-                          />
-                        </div>
-                      </div>
-                      <hr className="mt-0" />
-
-                      <div className="progress-group">
-                        <div className="progress-group-header">
-                          <i className="icon-globe progress-group-icon" />
-                          <span className="title text-muted">Pria / Kaum Bapa</span>
-                          <span className="ml-auto font-weight-bold">
-                            191,235{" "}
-                            <span className="text-muted small">(56%)</span>
-                          </span>
-                        </div>
-                        <div className="progress-group-bars">
-                          <Progress
-                            className="progress-xs"
-                            color="danger"
-                            value="56"
-                          />
-                        </div>
-                      </div>
-                      <div className="progress-group">
-                        <div className="progress-group-header">
-                          <i className="icon-social-facebook progress-group-icon" />
-                          <span className="title text-muted">Wanita / Kaum Bapa</span>
-                          <span className="ml-auto font-weight-bold">
-                            51,223{" "}
-                            <span className="text-muted small">(15%)</span>
-                          </span>
-                        </div>
-                        <div className="progress-group-bars">
-                          <Progress
-                            className="progress-xs"
-                            color="danger"
-                            value="15"
-                          />
-                        </div>
-                      </div>
-                      <div className="progress-group">
-                        <div className="progress-group-header">
-                          <i className="icon-social-twitter progress-group-icon" />
-                          <span className="title text-muted">Pemuda</span>
-                          <span className="ml-auto font-weight-bold">
-                            37,564{" "}
-                            <span className="text-muted small">(11%)</span>
-                          </span>
-                        </div>
-                        <div className="progress-group-bars">
-                          <Progress
-                            className="progress-xs"
-                            color="danger"
-                            value="11"
-                          />
-                        </div>
-                      </div>
-                      <div className="progress-group">
-                        <div className="progress-group-header">
-                          <i className="icon-social-linkedin progress-group-icon" />
-                          <span className="title text-muted">Remaja</span>
-                          <span className="ml-auto font-weight-bold">
-                            27,319{" "}
-                            <span className="text-muted small">(8%)</span>
-                          </span>
-                        </div>
-                        <div className="progress-group-bars">
-                          <Progress
-                            className="progress-xs"
-                            color="danger"
-                            value="8"
-                          />
-                        </div>
-                      </div>
-                      <div className="progress-group mb-4">
-                        <div className="progress-group-header">
-                          <i className="icon-social-linkedin progress-group-icon" />
-                          <span className="title text-muted">Anak</span>
-                          <span className="ml-auto font-weight-bold">
-                            27,319{" "}
-                            <span className="text-muted small">(8%)</span>
-                          </span>
-                        </div>
-                        <div className="progress-group-bars">
-                          <Progress
-                            className="progress-xs"
-                            color="danger"
-                            value="8"
-                          />
-                        </div>
-                      </div>
-
-                      <hr className="mt-0" />
-                      <div className="divider text-center">
-                        <Row>
-                          <Col sm={12} md className="mb-sm-2 mb-0">
-                            <div className="text-muted">Baptis</div>
-                            <strong>1.242</strong><span className="text-muted pl-1">(40%)</span>
-                            <Progress
-                              className="progress-xs mt-2"
-                              color="info"
-                              value="40"
-                            />
-                          </Col>
-                          <Col sm={12} md className="mb-sm-2 mb-0">
-                            <div className="text-muted">Sidi</div>
-                            <strong>255</strong><span className="text-muted pl-1">(70%)</span>
-                            <Progress
-                              className="progress-xs mt-2"
-                              color="info"
-                              value="70"
-                            />
-                          </Col>
-                          <Col sm={12} md className="mb-sm-2 mb-0">
-                            <div className="text-muted">Nikah</div>
-                            <strong>214</strong><span className="text-muted pl-1">(15%)</span>
-                            <Progress
-                              className="progress-xs mt-2"
-                              color="info"
-                              value="15"
-                            />
-                          </Col>
-                          <Col sm={12} sm className="mb-sm-2 mb-0 my-auto">
-                            <div className="border p-2 rounded-lg color-primary bg-info">
-                              <div>TOTAL</div>
-                              <strong>29.703</strong>
-                            </div>
-
-                          </Col>
-                        </Row>
-                      </div>
-                    </ul>
-
-                  </Col>
+                                    </Col>
+                                </CardBody>
+                            </Card>
+                        </Suspense>
+                    </Col>
                 </Row>
-              </CardBody>
 
-            </Card>
-          </Col>
+                <Row>
+                    <Col>
+                        <Card>
 
-        </Row>
+                            <CardHeader>
+                                <CardTitle className="mb-0"><h4>Tentang Gereja</h4></CardTitle>
+                            </CardHeader>
 
-        <Row>
-          <Col sm="3">
-            <Widget02 header="Custumer Service" mainText="+62 812 9402" icon="icon-phone" color="secondary" variant="1" />
-          </Col>
+                            <CardBody>
+                                <Row>
+                                    <Col sm="6">
+                                        <div className="">
+                                            <span className="text-muted"> Nama Jemaat </span><br/>
+                                            <p className=""> Bait-el </p>
+                                        </div>
 
-          <Col sm="3">
-            <Widget02 header="WhatsApp" mainText="+62 812 9402" icon="fa fa-whatsapp" color="success" variant="1" />
-          </Col>
+                                        <div>
+                                            <span className="text-muted"> Telepon </span><br/>
+                                            <p className="mt-0"> +62 852 1234 4213 </p>
+                                        </div>
+                                        <div>
+                                            <span className="text-muted"> Email </span><br/>
+                                            <p className="mt-0"> bait-elrambo@tou.com </p>
+                                        </div>
 
-          <Col sm="3">
-            <Widget02 header="Instagram" mainText="@meimo.dev" icon="fa fa-instagram" color="danger" variant="1" />
-          </Col>
+                                        <div className="">
+                                            <span className="text-muted"> Kabupaten / Kota </span><br/>
+                                            <p className="mt-0"> Majemba </p>
+                                        </div>
+                                        <div>
+                                            <span className="text-muted"> Kecamatan </span><br/>
+                                            <p className="mt-0"> Kyoki </p>
+                                        </div>
+                                        <div>
+                                            <span className="text-muted"> Kelurahan / Desa </span><br/>
+                                            <p className="mt-0"> Rambo </p>
+                                        </div>
+                                        <div>
+                                            <span className="text-muted"> Alamat </span><br/>
+                                            <p className="mt-0"> Jln. Rambo-rambo, No 186 (depan jembatan joni) </p>
+                                        </div>
 
-          <Col sm="3">
-            <Widget02 header="Website" mainText="www.meimodev.com" icon="fa fa-globe" color="warning" variant="1" />
-          </Col>
-        </Row>
+                                    </Col>
+                                    <Col sm="6">
 
-        {/* 
+                                        <ul className="pl-0 ">
+
+                                            <div className="progress-group">
+                                                <div className="progress-group-header">
+                                                    <i className="icon-user progress-group-icon"/>
+                                                    <span className="title text-muted">Laki-laki</span>
+                                                    <span className="ml-auto font-weight-bold mr-1">1.245</span>
+                                                    <span className="text-muted small">(60%)</span>
+
+                                                </div>
+                                                <div className="progress-group-bars">
+                                                    <Progress
+                                                        className="progress-xs"
+                                                        color="primary"
+                                                        value="60"
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div className="progress-group mb-4">
+                                                <div className="progress-group-header">
+                                                    <i className="icon-user-female progress-group-icon"/>
+                                                    <span className="title text-muted">Perempuan</span>
+                                                    <span className="ml-auto font-weight-bold mr-1">1.245</span>
+                                                    <span className="text-muted small">(15%)</span>
+                                                </div>
+                                                <div className="progress-group-bars">
+                                                    <Progress
+                                                        className="progress-xs"
+                                                        color="primary"
+                                                        value="15"
+                                                    />
+                                                </div>
+                                            </div>
+                                            <hr className="mt-0"/>
+
+                                            <div className="progress-group">
+                                                <div className="progress-group-header">
+                                                    <i className="icon-globe progress-group-icon"/>
+                                                    <span className="title text-muted">Pria / Kaum Bapa</span>
+                                                    <span className="ml-auto font-weight-bold">
+                            191,235{" "}
+                                                        <span className="text-muted small">(56%)</span>
+                          </span>
+                                                </div>
+                                                <div className="progress-group-bars">
+                                                    <Progress
+                                                        className="progress-xs"
+                                                        color="danger"
+                                                        value="56"
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div className="progress-group">
+                                                <div className="progress-group-header">
+                                                    <i className="icon-social-facebook progress-group-icon"/>
+                                                    <span className="title text-muted">Wanita / Kaum Bapa</span>
+                                                    <span className="ml-auto font-weight-bold">
+                            51,223{" "}
+                                                        <span className="text-muted small">(15%)</span>
+                          </span>
+                                                </div>
+                                                <div className="progress-group-bars">
+                                                    <Progress
+                                                        className="progress-xs"
+                                                        color="danger"
+                                                        value="15"
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div className="progress-group">
+                                                <div className="progress-group-header">
+                                                    <i className="icon-social-twitter progress-group-icon"/>
+                                                    <span className="title text-muted">Pemuda</span>
+                                                    <span className="ml-auto font-weight-bold">
+                            37,564{" "}
+                                                        <span className="text-muted small">(11%)</span>
+                          </span>
+                                                </div>
+                                                <div className="progress-group-bars">
+                                                    <Progress
+                                                        className="progress-xs"
+                                                        color="danger"
+                                                        value="11"
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div className="progress-group">
+                                                <div className="progress-group-header">
+                                                    <i className="icon-social-linkedin progress-group-icon"/>
+                                                    <span className="title text-muted">Remaja</span>
+                                                    <span className="ml-auto font-weight-bold">
+                            27,319{" "}
+                                                        <span className="text-muted small">(8%)</span>
+                          </span>
+                                                </div>
+                                                <div className="progress-group-bars">
+                                                    <Progress
+                                                        className="progress-xs"
+                                                        color="danger"
+                                                        value="8"
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div className="progress-group mb-4">
+                                                <div className="progress-group-header">
+                                                    <i className="icon-social-linkedin progress-group-icon"/>
+                                                    <span className="title text-muted">Anak</span>
+                                                    <span className="ml-auto font-weight-bold">
+                            27,319{" "}
+                                                        <span className="text-muted small">(8%)</span>
+                          </span>
+                                                </div>
+                                                <div className="progress-group-bars">
+                                                    <Progress
+                                                        className="progress-xs"
+                                                        color="danger"
+                                                        value="8"
+                                                    />
+                                                </div>
+                                            </div>
+
+                                            <hr className="mt-0"/>
+                                            <div className="divider text-center">
+                                                <Row>
+                                                    <Col sm={12} md className="mb-sm-2 mb-0">
+                                                        <div className="text-muted">Baptis</div>
+                                                        <strong>1.242</strong><span
+                                                        className="text-muted pl-1">(40%)</span>
+                                                        <Progress
+                                                            className="progress-xs mt-2"
+                                                            color="info"
+                                                            value="40"
+                                                        />
+                                                    </Col>
+                                                    <Col sm={12} md className="mb-sm-2 mb-0">
+                                                        <div className="text-muted">Sidi</div>
+                                                        <strong>255</strong><span
+                                                        className="text-muted pl-1">(70%)</span>
+                                                        <Progress
+                                                            className="progress-xs mt-2"
+                                                            color="info"
+                                                            value="70"
+                                                        />
+                                                    </Col>
+                                                    <Col sm={12} md className="mb-sm-2 mb-0">
+                                                        <div className="text-muted">Nikah</div>
+                                                        <strong>214</strong><span
+                                                        className="text-muted pl-1">(15%)</span>
+                                                        <Progress
+                                                            className="progress-xs mt-2"
+                                                            color="info"
+                                                            value="15"
+                                                        />
+                                                    </Col>
+                                                    <Col sm={12} sm className="mb-sm-2 mb-0 my-auto">
+                                                        <div className="border p-2 rounded-lg color-primary bg-info">
+                                                            <div>TOTAL</div>
+                                                            <strong>29.703</strong>
+                                                        </div>
+
+                                                    </Col>
+                                                </Row>
+                                            </div>
+                                        </ul>
+
+                                    </Col>
+                                </Row>
+                            </CardBody>
+
+                        </Card>
+                    </Col>
+
+                </Row>
+
+                <Row>
+                    <Col sm="3">
+                        <Widget02 header="Custumer Service" mainText="+62 812 9402" icon="icon-phone" color="secondary"
+                                  variant="1"/>
+                    </Col>
+
+                    <Col sm="3">
+                        <Widget02 header="WhatsApp" mainText="+62 812 9402" icon="fa fa-whatsapp" color="success"
+                                  variant="1"/>
+                    </Col>
+
+                    <Col sm="3">
+                        <Widget02 header="Instagram" mainText="@meimo.dev" icon="fa fa-instagram" color="danger"
+                                  variant="1"/>
+                    </Col>
+
+                    <Col sm="3">
+                        <Widget02 header="Website" mainText="www.meimodev.com" icon="fa fa-globe" color="warning"
+                                  variant="1"/>
+                    </Col>
+                </Row>
+
+                {/*
         <Row>
           <Col>
             <Card>
@@ -1511,9 +1520,9 @@ class Dashboard extends Component {
           </Col>
         </Row> */}
 
-      </div>
-    );
-  }
+            </div>
+        );
+    }
 }
 
 export default Dashboard;
