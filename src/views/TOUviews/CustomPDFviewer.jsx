@@ -44,7 +44,7 @@ export class CustomPDFviewer extends Component {
     onRenderError = () => {
         return (
             <div className="animated fadeIn p-4 text-center my-auto">
-                <span className="my-auto">-_-' Terjadi kesalahan silahkan muat ulang halaman</span>
+                <span className="my-auto"><i className="cui-ban text-danger pr-2"/> Terjadi kesalahan silahkan muat ulang halaman</span>
             </div>        )
     };
     onLoadingDocument = () => {
