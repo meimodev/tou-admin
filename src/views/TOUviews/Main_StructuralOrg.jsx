@@ -70,6 +70,7 @@ export class Main_StructuralOrg extends Component {
 
                   <CustomOrganizationTableRow
                     memberName="Jhony One"
+                    column="Kolom 2"
                     memberBIPRA="Pria / Kaum Bapa"
                     memberAge={44}
                     isBaptize={true}
@@ -78,6 +79,7 @@ export class Main_StructuralOrg extends Component {
                     ]} />
                   <CustomOrganizationTableRow
                     memberName="Jose condios"
+                    column="Kolom 7"
                     memberBIPRA="Pemuda"
                     memberAge={25}
                     isBaptize={true}
@@ -87,6 +89,7 @@ export class Main_StructuralOrg extends Component {
                     ]} />
                   <CustomOrganizationTableRow
                     memberName="Third Brie"
+                    column="Kolom 92"
                     memberBIPRA="Wanita / Kaum Ibu"
                     memberAge={55}
                     isBaptize

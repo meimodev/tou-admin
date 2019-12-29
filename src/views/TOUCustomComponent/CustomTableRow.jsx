@@ -23,12 +23,20 @@ import {
     Input
 } from "reactstrap"
 
-import React, { Component } from 'react'
+import React, {Component} from 'react'
+import CustomModalAddPosition from "./CustomModalAddPosition";
 
 export class CustomOrganizationTableRow extends Component {
+
+    state = {
+        isModalAddOpen: false,
+        isModalDelOpen: false
+    }
+
     render() {
         const {
             memberName,
+            column,
             memberBIPRA,
             memberAge,
             isBaptize,
@@ -38,9 +46,9 @@ export class CustomOrganizationTableRow extends Component {
         } = this.props
 
         /**
-        * @param {string} stats accept from Enums::BIPRA.
-        * @param {boolean} bool stats condition.
-        */
+         * @param {string} stats accept from Enums::BIPRA.
+         * @param {boolean} bool stats condition.
+         */
         let createLetterStatuses = (stats, bool) => {
             let badge = bool ?
                 <span className="badge badge-success ml-1 mr-1">&#10003;</span>
@@ -54,20 +62,33 @@ export class CustomOrganizationTableRow extends Component {
         }
 
         /**
-        * @param {string} pos position from Enums::CHURCH_POSITION.
-        */
+         * @param {string} pos position from Enums::CHURCH_POSITION.
+         */
         let createPosition = (pos) => {
             return (
-                    <div> <span className="badge badge-success">{pos}</span></div>
+                <div><span className="badge badge-success">{pos}</span></div>
             )
         }
 
-        let createpositions = () =>{
+        let createPositions = () => {
             let res = []
-            for (let i = 0; i < positions.length; i++)  {
-                res.push (createPosition(positions[i]))      
+            for (let i = 0; i < positions.length; i++) {
+                res.push(createPosition(positions[i]))
             }
-          return res
+            return res
+        }
+
+        let openModal = (isAdd) => {
+            let modal;
+            isAdd ?
+                modal = {isModalAddOpen: true, isModalDelOpen: false}
+                :
+                modal = {isModalAddOpen: false, isModalDelOpen: true}
+            this.setState(modal)
+        }
+
+        let onModalToggle = () => {
+            this.setState({isModalAddOpen:false, isModalDelOpen:false})
         }
 
         return (
@@ -77,8 +98,9 @@ export class CustomOrganizationTableRow extends Component {
                 </td>
                 <td>
                     <div>{memberName}</div>
+
                     <div className="small text-muted">
-                        {memberBIPRA} | {memberAge} Tahun
+                        <strong>{column}</strong> | {memberBIPRA} | {memberAge} Tahun
                     </div>
                     <div className="small text-muted">
                         {createLetterStatuses("Baptis", isBaptize)}
@@ -87,18 +109,20 @@ export class CustomOrganizationTableRow extends Component {
                     </div>
                 </td>
                 <td className="text-center">
-                    {createpositions()}
+                    {createPositions()}
                 </td>
                 <td className="text-center">
                     <div className="mb-2">
-                        <Button color="primary">Tambah Posisi</Button>
+                        <Button onClick={()=>openModal(true)} color="primary">Tambah Posisi</Button>
+                        <CustomModalAddPosition isOpen={this.state.isModalAddOpen} isAdding={true}
+                                                onModalToggle={onModalToggle}/>
                     </div>
                     <div className="mt-2">
-                        <Button color="secondary" size="sm" >Hapus Posisi</Button>
+                        <Button onClick={()=>openModal(false)} color="secondary" size="sm">Hapus Posisi</Button>
+                        <CustomModalAddPosition isOpen={this.state.isModalDelOpen} isAdding={false}
+                                                onModalToggle={onModalToggle}/>
                     </div>
                 </td>
-
-
             </tr>
         )
     }
@@ -109,7 +133,7 @@ export class CustomMemberDataTableRow extends Component {
     render() {
         return (
             <div>
-                
+
             </div>
         )
     }

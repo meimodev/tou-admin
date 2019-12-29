@@ -96,7 +96,7 @@ export class CustomPDFviewer extends Component {
         const currentPageNumber = this.state.pageNumber;
         let prevPageNumber;
 
-        if (currentPageNumber - 1 == 0) {
+        if (currentPageNumber - 1 === 0) {
             prevPageNumber = 1;
         } else {
             prevPageNumber = currentPageNumber - 1;
