@@ -48,14 +48,14 @@ class CustomModalAddPosition extends Component {
                                 <FormGroup row>
                                     <Col >
                                         <Input type="select" name="select" id="select">
-                                            <option value="1">Pilih Posisi</option>
-                                            <option value="2">Ketua Jemaat</option>
-                                            <option value="3">Sekertaris Jemaat</option>
-                                            <option value="4">Penatua Kolom</option>
-                                            <option value="5">Syamas Kolom</option>
-                                            <option value="6">Sekertaris Jemaat</option>
-                                            <option value="7">Penatua Kolom</option>
-                                            <option value="8">Syamas Kolom</option>
+                                            <option key="1" value="1">Pilih Posisi</option>
+                                            <option key="2" value="2">Ketua Jemaat</option>
+                                            <option key="3" value="3">Sekertaris Jemaat</option>
+                                            <option key="4" value="4">Penatua Kolom</option>
+                                            <option key="5" value="5">Syamas Kolom</option>
+                                            <option key="6" value="6">Sekertaris Jemaat</option>
+                                            <option key="7" value="7">Penatua Kolom</option>
+                                            <option key="8" value="8">Syamas Kolom</option>
                                         </Input>
                                     </Col>
                                 </FormGroup>
