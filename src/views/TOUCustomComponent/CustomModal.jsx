@@ -17,16 +17,47 @@ import {
 
 export class CustomModalAddPosition extends Component {
 
+    state = {
+        selected: '',
+    }
+
     generatePositionList = (type) => {
         let possessedPositions = this.props.possessedPositions
+        let env_positions = ['Silahkan Pilih Posisi: ', ...this.props.env_positions]
         if (type === 'add') {
-            let filtered = this.props.env_positions.filter(e => !possessedPositions.includes(e))
-            return filtered.map((e,index) => <option key={index}>{e}</option>);
+            let filtered = env_positions.filter(e => !possessedPositions.includes(e))
+            return filtered.map((e,index) => <option key={index} value={e}>{e}</option>);
 
         } else {
-            return this.props.possessedPositions.map((e,index) => <option key={index}>{e}</option>)
+            let possessedPositions = ['Silahkan Pilih Posisi:', ...this.props.possessedPositions]
+            return possessedPositions.map((e,index) => <option key={index} value={e}>{e}</option>)
         }
     }
+
+    handleButtonClick = (e, type) =>{
+        e.preventDefault()
+
+        if(!this.state.selected||this.state.selected.includes(':')){
+            alert('posisi tersebut tidak valid. Silahkan pilih posisi yang lain')
+            return
+        }
+
+        if (type === 'add'){
+            this.props.onAlterPosition('add', this.props.rowIndex, this.state.selected, this.props.memberId)
+        }else{
+            this.props.onAlterPosition('del', this.props.rowIndex, this.state.selected, this.props.memberId)
+        }
+        this.props.onModalToggle()
+
+    }
+
+    handleSelectChange = (e)=>{
+        if (e.target.value.includes(':')){
+            alert('posisi tersebut tidak valid. Silahkan pilih posisi yang lain')
+            e.target.value = this.state.selected
+        }else this.setState({selected: e.target.value})
+    }
+
 
     render() {
         const {isOpen, onModalToggle, isAdding} = this.props;
@@ -43,7 +74,7 @@ export class CustomModalAddPosition extends Component {
                             <div className=" mt-1">
                                 <FormGroup row>
                                     <Col>
-                                        <Input type="select" name="select" id="select">
+                                        <Input type="select" name="selectAdd" id="selectAdd" onChange={this.handleSelectChange}>
                                             {this.generatePositionList('add')}
                                         </Input>
                                     </Col>
@@ -51,8 +82,7 @@ export class CustomModalAddPosition extends Component {
                             </div>
                         </ModalBody>
                         <ModalFooter>
-                            <Button color="primary" onClick={onModalToggle}>Tambah Posisi</Button>
-                            <Button color="secondary" onClick={onModalToggle}>Batal</Button>
+                            <Button color="primary" onClick={(e)=>this.handleButtonClick(e, 'add',this.state.selected)}>Tambah Posisi</Button>
                         </ModalFooter>
                     </Modal>
                     :
@@ -64,7 +94,7 @@ export class CustomModalAddPosition extends Component {
                             <div className="mt-1">
                                 <FormGroup row>
                                     <Col xs="12" md="9">
-                                        <Input type="select" name="select" id="select">
+                                        <Input type="select" name="selectDel" id="selectDel" onChange={this.handleSelectChange}>
                                             {this.generatePositionList('del')}
                                         </Input>
                                     </Col>
@@ -72,8 +102,7 @@ export class CustomModalAddPosition extends Component {
                             </div>
                         </ModalBody>
                         <ModalFooter>
-                            <Button color="danger" onClick={onModalToggle}>Hapus Posisi</Button>
-                            <Button color="secondary" onClick={onModalToggle}>Batal</Button>
+                            <Button color="danger" onClick={(e)=>this.handleButtonClick(e, 'del', this.state.selected)}>Hapus Posisi</Button>
                         </ModalFooter>
                     </Modal>}
             </React.Fragment>

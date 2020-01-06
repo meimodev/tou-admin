@@ -36,6 +36,7 @@ export class CustomOrganizationTableRow extends Component {
     render() {
         const {
             id,
+            rowIndex,
             memberName,
             column,
             memberBIPRA,
@@ -46,7 +47,6 @@ export class CustomOrganizationTableRow extends Component {
             positions,
             env_positions,
         } = this.props
-
         /**
          * @param {string} stats accept from Enums::BIPRA.
          * @param {boolean} bool stats condition.
@@ -102,16 +102,22 @@ export class CustomOrganizationTableRow extends Component {
                         <Button onClick={(e) => openModal(e, true)} color="primary">Tambah Posisi</Button>
                         <CustomModalAddPosition isOpen={this.state.isModalAddOpen}
                                                 isAdding={true}
+                                                memberId={id}
                                                 env_positions={env_positions}
                                                 possessedPositions={positions}
+                                                rowIndex={rowIndex}
+                                                onAlterPosition={this.props.onAlterPosition}
                                                 onModalToggle={onModalToggle}/>
                     </div>
                     <div className="mt-2">
                         <Button onClick={(e) => openModal(e, false)} color="secondary" size="sm">Hapus Posisi</Button>
                         <CustomModalAddPosition isOpen={this.state.isModalDelOpen}
                                                 isAdding={false}
+                                                memberId={id}
                                                 possessedPositions={positions}
                                                 env_positions={env_positions}
+                                                rowIndex={rowIndex}
+                                                onAlterPosition={this.props.onAlterPosition}
                                                 onModalToggle={onModalToggle}/>
                     </div>
                 </td>

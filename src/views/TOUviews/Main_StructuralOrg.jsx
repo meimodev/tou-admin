@@ -37,53 +37,106 @@ export class Main_StructuralOrg extends Component {
         env_isLoading: true,
         env_isError: false,
         env_error: null,
+        env_onTryAgain: null,
         env_positionList: []
     }
 
     handleTryAgain = event => {
         event.preventDefault()
-        this.setState({
-            env_isLoading: true,
-            env_isError: false,
-        })
-        this.fetchStructureOrganizationData()
-        this.fetchPositionList()
+
+
+        this.state.env_onTryAgain()
+
     }
 
     fetchStructureOrganizationData = () => {
+        this.setState({
+            env_isLoading: true,
+            env_isError: false,
+            env_error: null,
+        })
         Axios.get(RequestHandler.generateLocalURLFromPath('/panel-structure-organization'), RequestHandler.generateConfigWithParameter({'church_id': 1}))
             .then(res => {
                 let data = res.data.data
                 console.log('get structure organization data')
                 console.log(data)
-                this.setState({data})
-                this.setState({env_isLoading: false, env_isError: false, env_error: null})
+                this.setState({data, env_isLoading: false, env_isError: false, env_error: null})
             })
             .catch(err => {
-                console.log('error get structure organization data')
-                console.log(err)
-                this.setState({env_isLoading: false, env_isError: true, env_error: err})
+                console.error('error get structure organization data')
+                console.error(err)
+                this.setState({
+                    env_isLoading: false,
+                    env_isError: true,
+                    env_error: err,
+                    env_onTryAgain: this.fetchStructureOrganizationData
+                })
             })
     }
 
     fetchPositionList = () => {
+        this.setState({
+            env_isLoading: true,
+            env_isError: false,
+        })
         Axios.get(RequestHandler.generateLocalURLFromPath('/position-list'))
             .then(res => {
                 let data = res.data.data
                 console.log('get env position list data')
                 console.log(data)
-                this.setState({env_positionList: data})
+                this.setState({env_positionList: data}/*, env_isLoading: false, env_isError: false, env_error: null}*/)
             })
             .catch(err => {
-                console.log('error get env position list data')
-                console.log(err)
-                this.setState({env_isLoading: false, env_isError: true, env_error: null})
+                console.error('error get env position list data')
+                console.error(err)
+                this.setState({
+                    env_isLoading: false,
+                    env_isError: true,
+                    env_error: err,
+                    env_onTryAgain: this.fetchPositionList
+                })
             })
     }
 
     componentDidMount() {
         this.fetchStructureOrganizationData()
         this.fetchPositionList()
+    }
+
+    handleOnAlterPosition = (type, index, position, memberId) => {
+        this.setState({
+            env_isLoading: true,
+            env_isError: false,
+            env_error: null,
+        })
+        this.setState({env_isError: false, env_isLoading: true})
+            Axios.post(RequestHandler.generateLocalURLFromPath('/panel-structure-organization'),
+                {type, position, member_id: memberId},
+                RequestHandler.generateDefaultConfig())
+                .then(res => {
+                    let data = res.data.data
+                    console.log('OK! altered position of member with ID = ' + memberId)
+                    console.log(data)
+                    let d = this.state.data[index].positions
+                    let stateData = [...this.state.data]
+                    stateData[index].positions = data.positions
+                    console.log(stateData)
+                    this.setState({
+                        env_isError: false,
+                        env_isLoading: false,
+                        env_error:null
+                    })
+                })
+                .catch(err => {
+                    console.error('ERROR! while altering position ')
+                    console.error(err)
+                    this.setState({
+                        env_isError: true,
+                        env_isLoading: false,
+                        env_error:err,
+                        env_onTryAgain: () => this.handleOnAlterPosition(type, index, position, memberId)
+                    })
+                })
     }
 
     render() {
@@ -127,19 +180,21 @@ export class Main_StructuralOrg extends Component {
                                 </thead>
                                 <tbody>
                                 {
-                                    this.state.data.map(d =>
+                                    this.state.data.map((e, index) =>
                                         <CustomOrganizationTableRow
-                                            key={d.user_id}
-                                            id={d.member_id}
-                                            memberName={d.full_name}
-                                            column={"Kolom " + d.column}
-                                            memberBIPRA={d.BIPRA}
-                                            memberAge={d.age}
-                                            isBaptize={d.is_baptize}
-                                            isSidi={d.is_sidi}
-                                            isMarried={d.is_married}
-                                            positions={d.positions}
+                                            key={index}
+                                            rowIndex={index}
+                                            id={e.member_id}
+                                            memberName={e.full_name}
+                                            column={"Kolom " + e.column}
+                                            memberBIPRA={e.BIPRA}
+                                            memberAge={e.age}
+                                            isBaptize={e.is_baptize}
+                                            isSidi={e.is_sidi}
+                                            isMarried={e.is_married}
+                                            positions={e.positions}
                                             env_positions={this.state.env_positionList}
+                                            onAlterPosition={this.handleOnAlterPosition}
                                         />)
                                 }
                                 </tbody>
