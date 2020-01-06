@@ -21,6 +21,7 @@ import sygnet from "../../assets/img/brand/sygnet.svg";
 import avatar from "../../assets/img/avatar.png";
 
 import { Redirect } from "react-router-dom";
+import UncontrolledDropdown from "reactstrap/lib/UncontrolledDropdown";
 
 const propTypes = {
   children: PropTypes.node
@@ -75,7 +76,7 @@ class DefaultHeader extends Component {
               <i className="icon-location-pin" />
             </NavLink>
           </NavItem> */}
-          <AppHeaderDropdown className="mr-5" direction="down">
+          <UncontrolledDropdown className="mr-5" nav direction="down">
             <DropdownToggle nav>
               {/* <img
                 src={logo}
@@ -134,7 +135,7 @@ class DefaultHeader extends Component {
                 <i className="fa fa-lock" /> Keluar
               </DropdownItem>
             </DropdownMenu>
-          </AppHeaderDropdown>
+          </UncontrolledDropdown>
         </Nav>
         {/* <AppAsideToggler className="d-md-down-none" /> */}
         {/*<AppAsideToggler className="d-lg-none" mobile />*/}

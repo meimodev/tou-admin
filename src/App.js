@@ -1,16 +1,11 @@
 import React, {Component} from 'react';
 import {HashRouter, Route, Switch} from 'react-router-dom';
-// import { renderRoutes } from 'react-router-config';
 import './App.scss';
 
 const loading = () =>
-    <div>
-        <div className="animated fadeIn pt-1 text-center my-auto">
-            <div className="spinner-border text-primary" role="status">
-                <span className="sr-only">Sedang Memuat ...</span>
-            </div>
-        </div>
-    </div>;
+    <div className="container animated fadeIn text-center pt-lg-5 ">
+        <div className="spinner-border text-primary" role="status"/>
+    </div>
 
 // Containers
 const DefaultLayout = React.lazy(() => import('./containers/DefaultLayout'));

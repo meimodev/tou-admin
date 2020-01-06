@@ -12,10 +12,78 @@ import {
     Row,
     FormGroup,
     Label,
-    Input, Form, InputGroup, InputGroupAddon, InputGroupText, FormText
+    Input, Form, InputGroup, InputGroupAddon, InputGroupText
 } from 'reactstrap';
 
-class CustomModalMemberData extends Component {
+export class CustomModalAddPosition extends Component {
+
+    generatePositionList = (type) => {
+        let possessedPositions = this.props.possessedPositions
+        if (type === 'add') {
+            let filtered = this.props.env_positions.filter(e => !possessedPositions.includes(e))
+            return filtered.map((e,index) => <option key={index}>{e}</option>);
+
+        } else {
+            return this.props.possessedPositions.map((e,index) => <option key={index}>{e}</option>)
+        }
+    }
+
+    render() {
+        const {isOpen, onModalToggle, isAdding} = this.props;
+
+        return (
+            <React.Fragment>
+                {isAdding ?
+                    <Modal isOpen={isOpen}
+                           toggle={onModalToggle}
+                           className={'modal-lg modal-primary modal-dialog modal-dialog-centered ' + this.props.className}>
+                        <ModalHeader toggle={onModalToggle}>Tambah Posisi</ModalHeader>
+                        <ModalBody>
+                            <div className="ml-3">Jhon Manembo, <strong>Kolom 4</strong></div>
+                            <div className=" mt-1">
+                                <FormGroup row>
+                                    <Col>
+                                        <Input type="select" name="select" id="select">
+                                            {this.generatePositionList('add')}
+                                        </Input>
+                                    </Col>
+                                </FormGroup>
+                            </div>
+                        </ModalBody>
+                        <ModalFooter>
+                            <Button color="primary" onClick={onModalToggle}>Tambah Posisi</Button>
+                            <Button color="secondary" onClick={onModalToggle}>Batal</Button>
+                        </ModalFooter>
+                    </Modal>
+                    :
+                    <Modal isOpen={isOpen} toggle={onModalToggle}
+                           className={'modal-lg modal-danger modal-dialog modal-dialog-centered ' + this.props.className}>
+                        <ModalHeader toggle={onModalToggle}>Hapus Posisi</ModalHeader>
+                        <ModalBody>
+                            <div className="ml-3">Jhon Manembo, <strong>Kolom 4</strong></div>
+                            <div className="mt-1">
+                                <FormGroup row>
+                                    <Col xs="12" md="9">
+                                        <Input type="select" name="select" id="select">
+                                            {this.generatePositionList('del')}
+                                        </Input>
+                                    </Col>
+                                </FormGroup>
+                            </div>
+                        </ModalBody>
+                        <ModalFooter>
+                            <Button color="danger" onClick={onModalToggle}>Hapus Posisi</Button>
+                            <Button color="secondary" onClick={onModalToggle}>Batal</Button>
+                        </ModalFooter>
+                    </Modal>}
+            </React.Fragment>
+
+        );
+    }
+}
+
+
+export class CustomModalMemberData extends Component {
 
     state = {
         degreeSelectorCount: 0
@@ -250,4 +318,3 @@ class CustomModalMemberData extends Component {
     }
 }
 
-export default CustomModalMemberData;

@@ -25,11 +25,8 @@ const DefaultHeader = React.lazy(() => import("./DefaultHeader"));
 
 class DefaultLayout extends Component {
     loading = () => (
-        <div className="animated fadeIn pt-1 text-center my-auto">
-          <div className="spinner-border text-primary" role="status">
-            <span className="sr-only">Sedang Memuat ...</span>
-
-          </div>
+        <div className="container animated fadeIn text-center pt-3">
+            <div className="spinner-border text-warning" role="status"/>
         </div>
     );
 
@@ -52,7 +49,7 @@ class DefaultLayout extends Component {
         return (
             <div className="app">
                 <AppHeader fixed>
-                    <Suspense fallback={this.loading()}>
+                    <Suspense >
                         <DefaultHeader
                             onLogout={this.signOut}
                             onRedirectTo={this.handleRedirectTo}

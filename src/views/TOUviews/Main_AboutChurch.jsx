@@ -85,7 +85,7 @@ export class Main_AboutChurch extends Component {
                 this.setState(state)
             })
             .catch(res => {
-                console.log('get church data'+ res)
+                console.log('get church data' + res)
             })
     }
 
@@ -99,18 +99,18 @@ export class Main_AboutChurch extends Component {
             RequestHandlerFunctions.generateDefaultConfig())
             .then(res => {
 
-                console.log('post church data'+res.data)
+                console.log('post church data' + res.data)
 
             })
             .catch(res => {
-                console.log('post church data'+res)
+                console.log('post church data' + res)
             })
 
     }
 
-    handleInputChange = (e,inputName) => {
+    handleInputChange = (e, inputName) => {
         let churchData = {...this.state.churchData}
-        switch(inputName){
+        switch (inputName) {
             default :
                 break
             case 'name':
@@ -146,7 +146,7 @@ export class Main_AboutChurch extends Component {
                         <Card>
                             <CardHeader>
                                 <CardTitle>
-                                    <h4>Tentang Gereja test</h4>
+                                    <h4>Tentang Gereja</h4>
                                 </CardTitle>
                             </CardHeader>
                             <CardBody>
@@ -158,7 +158,7 @@ export class Main_AboutChurch extends Component {
                                                    name="churchName"
                                                    id="churchName"
                                                    value={this.state.churchData.name}
-                                                   onChange={(e)=>this.handleInputChange(e,'name')} />
+                                                   onChange={(e) => this.handleInputChange(e, 'name')}/>
                                             <InputGroupAddon addonType="prepend">
                                                 <InputGroupText>
                                                     <i className="fa fa-user"/>
@@ -172,7 +172,7 @@ export class Main_AboutChurch extends Component {
                                                name="kabupatenKota"
                                                id="kabupatenKota"
                                                value={this.state.churchData.kabupaten}
-                                               onChange={(e)=>this.handleInputChange(e,'kab')} />
+                                               onChange={(e) => this.handleInputChange(e, 'kab')}/>
                                     </FormGroup>
                                     <FormGroup>
                                         <Label for="kecamatan">Kecamatan</Label>
@@ -180,7 +180,7 @@ export class Main_AboutChurch extends Component {
                                                name="kecamatan"
                                                id="kecamatan"
                                                value={this.state.churchData.kecamatan}
-                                               onChange={(e)=>this.handleInputChange(e,'kec')} />
+                                               onChange={(e) => this.handleInputChange(e, 'kec')}/>
                                     </FormGroup>
                                     <FormGroup>
                                         <Label for="kelurahanDesa">Kelurahan / Desa</Label>
@@ -188,7 +188,7 @@ export class Main_AboutChurch extends Component {
                                                name="kelurahanDesa"
                                                id="kelurahanDesa"
                                                value={this.state.churchData.kelurahan}
-                                               onChange={(e)=>this.handleInputChange(e,'kel')} />
+                                               onChange={(e) => this.handleInputChange(e, 'kel')}/>
                                     </FormGroup>
                                     <FormGroup>
                                         <Label for="phone">Telepon</Label>
@@ -197,7 +197,7 @@ export class Main_AboutChurch extends Component {
                                                    name="phone"
                                                    id="phone"
                                                    value={this.state.churchData.phone}
-                                                   onChange={(e)=>this.handleInputChange(e,'phone')} />
+                                                   onChange={(e) => this.handleInputChange(e, 'phone')}/>
                                             <InputGroupAddon addonType="prepend">
                                                 <InputGroupText>
                                                     <i className="fa fa-phone"/>
@@ -212,7 +212,7 @@ export class Main_AboutChurch extends Component {
                                                    name="email"
                                                    id="email"
                                                    value={this.state.churchData.email}
-                                                   onChange={(e)=>this.handleInputChange(e,'email')} />
+                                                   onChange={(e) => this.handleInputChange(e, 'email')}/>
                                             <InputGroupAddon addonType="prepend">
                                                 <InputGroupText>
                                                     <i className="fa fa-envelope-o"/>
@@ -223,8 +223,13 @@ export class Main_AboutChurch extends Component {
                                     <FormGroup>
                                         <Label for="exampleText">Alamat detil</Label>
                                         <InputGroup>
-                                            <Input type="textarea" name="text" id="exampleText"
-                                                   placeholder={this.state.churchData.address}/>
+                                            <Input type="textarea"
+                                                   name="text"
+                                                   id="exampleText"
+                                                   value={this.state.churchData.address}
+                                                   placeholder="alamat lengkap, contoh: nama jalan, penunjuk sekitar, dll"
+                                                   onChange={(e) => this.handleInputChange(e, 'address')}/>
+
                                             <InputGroupAddon addonType="prepend">
                                                 <InputGroupText>
                                                     <i className="fa fa-map-o"/>
@@ -238,7 +243,6 @@ export class Main_AboutChurch extends Component {
                                 </div>
                             </CardBody>
                         </Card>
-
                     </Col>
                 </Row>
             </div>

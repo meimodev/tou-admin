@@ -24,8 +24,7 @@ import {
 } from "reactstrap"
 
 import React, {Component} from 'react'
-import CustomModalAddPosition from "./CustomModalAddPosition";
-import CustomModalMemberData from "./CustomModalMemberData";
+import {CustomModalAddPosition} from "./CustomModal";
 
 export class CustomOrganizationTableRow extends Component {
 
@@ -36,14 +35,16 @@ export class CustomOrganizationTableRow extends Component {
 
     render() {
         const {
+            id,
             memberName,
             column,
             memberBIPRA,
             memberAge,
             isBaptize,
             isSidi,
-            isNikah,
-            positions
+            isMarried,
+            positions,
+            env_positions,
         } = this.props
 
         /**
@@ -62,25 +63,9 @@ export class CustomOrganizationTableRow extends Component {
             )
         }
 
-        /**
-         * @param {string} pos position from Enums::CHURCH_POSITION.
-         */
-        let createPosition = (pos) => {
-            return (
-                <div><span className="badge badge-success">{pos}</span></div>
-            )
-        }
-
-        let createPositions = () => {
-            let res = []
-            for (let i = 0; i < positions.length; i++) {
-                res.push(createPosition(positions[i]))
-            }
-            return res
-        }
-
-        let openModal = (isAdd) => {
-            let modal;
+        let openModal = (e, isAdd) => {
+            e.preventDefault()
+            let modal
             isAdd ?
                 modal = {isModalAddOpen: true, isModalDelOpen: false}
                 :
@@ -95,7 +80,7 @@ export class CustomOrganizationTableRow extends Component {
         return (
             <tr>
                 <td className="text-center">
-                    <div className="small text-muted">1</div>
+                    <div className="small text-muted">{id}</div>
                 </td>
                 <td>
                     <div>{memberName}</div>
@@ -106,21 +91,27 @@ export class CustomOrganizationTableRow extends Component {
                     <div className="small text-muted">
                         {createLetterStatuses("Baptis", isBaptize)}
                         {createLetterStatuses("Sidi", isSidi)}
-                        {createLetterStatuses("Nikah", isNikah)}
+                        {createLetterStatuses("Nikah", isMarried)}
                     </div>
                 </td>
                 <td className="text-center">
-                    {createPositions()}
+                    {positions.map((e,index) => <div key={index}><span className="badge badge-success">{e}</span></div> )}
                 </td>
                 <td className="text-center">
                     <div className="mb-2">
-                        <Button onClick={() => openModal(true)} color="primary">Tambah Posisi</Button>
-                        <CustomModalAddPosition isOpen={this.state.isModalAddOpen} isAdding={true}
+                        <Button onClick={(e) => openModal(e, true)} color="primary">Tambah Posisi</Button>
+                        <CustomModalAddPosition isOpen={this.state.isModalAddOpen}
+                                                isAdding={true}
+                                                env_positions={env_positions}
+                                                possessedPositions={positions}
                                                 onModalToggle={onModalToggle}/>
                     </div>
                     <div className="mt-2">
-                        <Button onClick={() => openModal(false)} color="secondary" size="sm">Hapus Posisi</Button>
-                        <CustomModalAddPosition isOpen={this.state.isModalDelOpen} isAdding={false}
+                        <Button onClick={(e) => openModal(e, false)} color="secondary" size="sm">Hapus Posisi</Button>
+                        <CustomModalAddPosition isOpen={this.state.isModalDelOpen}
+                                                isAdding={false}
+                                                possessedPositions={positions}
+                                                env_positions={env_positions}
                                                 onModalToggle={onModalToggle}/>
                     </div>
                 </td>

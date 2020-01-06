@@ -1,3 +1,30 @@
+import React, {Component} from "react";
+import {
+    Badge,
+    Button,
+    ButtonDropdown,
+    ButtonGroup,
+    ButtonToolbar,
+    Card,
+    CardBody,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+    Col,
+    Dropdown,
+    DropdownItem,
+    DropdownMenu,
+    DropdownToggle,
+    Progress,
+    Row,
+    Table,
+    Form,
+    FormGroup,
+    Label,
+    Input
+} from "reactstrap";
+import Container from "reactstrap/es/Container";
+
 const protocol = 'http'
 const ipAddress = '192.168.1.137'
 const port = '8000'
@@ -24,8 +51,49 @@ const RequestHandlerFunctions = {
                 'Authorization': 'Bearer ' + this.token
             }
         }
+    },
+    /**
+     * @param {boolean} isLoading .
+     * @param {boolean} isError .
+     * @param {error} error object from axios.catch.
+     * @param {function} onTryAgain onClick function for error Handling(trying same request again).
+     * @param {function} onRender main render if loading is done and error is false.
+     */
+    generateRenderWithLoadingAndErrorHandling: function (isLoading, isError, error, onTryAgain, onRender) {
+        if (isLoading) {
+            return <Container className="animated fadeIn text-center pt-3">
+                <div className="spinner-border text-primary" role="status"/>
+            </Container>
+        }
+        if (isError) {
+            if (error) console.error(error)
+            return onTryAgain ?
+                <div className="animated fadeIn">
+                    <Card className="pt-3" style={{background: 'transparent', border: 'transparent'}}>
+                        <div className="alert alert-warning text-center" role="alert">
+                            <i className="fa fa-warning text-danger pr-1"/> Transfer data bermasalah di karenakan
+                            koneksi jaringan yang kurang baik, silahkan dicoba kembali
+                        </div>
+                        <Button color="primary" onClick={onTryAgain}><i className="fa fa-refresh pr-1"/> Coba
+                            lagi</Button>
+                    </Card>
+                </div>
+                :
+                <div className="animated fadeIn">
+                    <Card className="pt-3" style={{background: 'transparent', border: 'transparent'}}>
+                        <div className="alert alert-danger text-center" role="alert">
+                            <i className="fa fa-expand text-danger pr-1"/>
+                            Koneksi Internet bermasalah ! silahkan coba sesaat lagi
+                        </div>
+                        <Button size="sm" color="primary" onClick={()=>window.location.reload()}><i
+                            className="fa expand pr-1"/> Muat Ulang Halaman</Button>
+                    </Card>
+                </div>
+        }
+        return onRender
     }
 }
+
 
 export default RequestHandlerFunctions
 

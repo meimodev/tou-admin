@@ -22,10 +22,7 @@ import {
     FormGroup,
     Input
 } from "reactstrap";
-import {
-    CustomMemberDataTableRow
-} from '../TOUCustomComponent/CustomTableRow'
-import CustomModalMemberData from "../TOUCustomComponent/CustomModalMemberData";
+import {CustomMemberDataTableRow} from '../TOUCustomComponent/CustomTableRow'
 
 export class Main_MembersData extends Component {
     render() {
