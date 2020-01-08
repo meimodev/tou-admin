@@ -36,6 +36,7 @@ export class CustomOrganizationTableRow extends Component {
     render() {
         const {
             id,
+            columnId,
             rowIndex,
             memberName,
             column,
@@ -103,6 +104,9 @@ export class CustomOrganizationTableRow extends Component {
                         <CustomModalAddPosition isOpen={this.state.isModalAddOpen}
                                                 isAdding={true}
                                                 memberId={id}
+                                                column ={column}
+                                                memberName={memberName}
+                                                columnId={columnId}
                                                 env_positions={env_positions}
                                                 possessedPositions={positions}
                                                 rowIndex={rowIndex}
@@ -114,8 +118,11 @@ export class CustomOrganizationTableRow extends Component {
                         <CustomModalAddPosition isOpen={this.state.isModalDelOpen}
                                                 isAdding={false}
                                                 memberId={id}
-                                                possessedPositions={positions}
+                                                column ={column}
+                                                memberName={memberName}
+                                                columnId={columnId}
                                                 env_positions={env_positions}
+                                                possessedPositions={positions}
                                                 rowIndex={rowIndex}
                                                 onAlterPosition={this.props.onAlterPosition}
                                                 onModalToggle={onModalToggle}/>

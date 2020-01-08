@@ -18,7 +18,7 @@ import {
 export class CustomModalAddPosition extends Component {
 
     state = {
-        selected: '',
+        selected: 'Silahkan Pilih Posisi :',
     }
 
     generatePositionList = (type) => {
@@ -26,41 +26,51 @@ export class CustomModalAddPosition extends Component {
         let env_positions = ['Silahkan Pilih Posisi: ', ...this.props.env_positions]
         if (type === 'add') {
             let filtered = env_positions.filter(e => !possessedPositions.includes(e))
-            return filtered.map((e,index) => <option key={index} value={e}>{e}</option>);
+            return filtered.map((e, index) => <option key={index} value={e}>{e}</option>);
 
         } else {
             let possessedPositions = ['Silahkan Pilih Posisi:', ...this.props.possessedPositions]
-            return possessedPositions.map((e,index) => <option key={index} value={e}>{e}</option>)
+            return possessedPositions.map((e, index) => <option key={index} value={e}>{e}</option>)
         }
     }
 
-    handleButtonClick = (e, type) =>{
+    handleButtonClick = (e, type) => {
         e.preventDefault()
 
-        if(!this.state.selected||this.state.selected.includes(':')){
+        if (!this.state.selected || this.state.selected.includes(':')) {
             alert('posisi tersebut tidak valid. Silahkan pilih posisi yang lain')
             return
         }
 
-        if (type === 'add'){
-            this.props.onAlterPosition('add', this.props.rowIndex, this.state.selected, this.props.memberId)
-        }else{
-            this.props.onAlterPosition('del', this.props.rowIndex, this.state.selected, this.props.memberId)
+        if (type === 'add') {
+            this.props.onAlterPosition('add', this.props.rowIndex, this.state.selected, this.props.memberId, this.props.columnId)
+        } else {
+            this.props.onAlterPosition('del', this.props.rowIndex, this.state.selected, this.props.memberId, this.props.columnId)
         }
         this.props.onModalToggle()
 
     }
 
-    handleSelectChange = (e)=>{
-        if (e.target.value.includes(':')){
+    handleSelectChange = (e) => {
+        if (e.target.value.includes(':')) {
             alert('posisi tersebut tidak valid. Silahkan pilih posisi yang lain')
             e.target.value = this.state.selected
-        }else this.setState({selected: e.target.value})
+            return
+        }
+        if (e.target.value.includes('Kolom')) {
+            if (!e.target.value.includes(this.props.column)) {
+                alert('Posisi "' + e.target.value + '" tidak bisa dipilih dikarenakan "' + this.props.memberName + '" tidak terdaftar dalam data kolom tersebut.')
+                this.setState({selected: 'Silahkan Pilih Posisi :'})
+                e.target.value = this.state.selected
+                return
+            }
+        }
+        this.setState({selected: e.target.value})
     }
 
 
     render() {
-        const {isOpen, onModalToggle, isAdding} = this.props;
+        const {memberName, column, isOpen, onModalToggle, isAdding} = this.props;
 
         return (
             <React.Fragment>
@@ -70,11 +80,12 @@ export class CustomModalAddPosition extends Component {
                            className={'modal-lg modal-primary modal-dialog modal-dialog-centered ' + this.props.className}>
                         <ModalHeader toggle={onModalToggle}>Tambah Posisi</ModalHeader>
                         <ModalBody>
-                            <div className="ml-3">Jhon Manembo, <strong>Kolom 4</strong></div>
+                            <div className="ml-3">{memberName}, <strong>{column}</strong></div>
                             <div className=" mt-1">
                                 <FormGroup row>
                                     <Col>
-                                        <Input type="select" name="selectAdd" id="selectAdd" onChange={this.handleSelectChange}>
+                                        <Input type="select" value={this.state.selected} name="selectAdd" id="selectAdd"
+                                               onChange={this.handleSelectChange}>
                                             {this.generatePositionList('add')}
                                         </Input>
                                     </Col>
@@ -82,7 +93,9 @@ export class CustomModalAddPosition extends Component {
                             </div>
                         </ModalBody>
                         <ModalFooter>
-                            <Button color="primary" onClick={(e)=>this.handleButtonClick(e, 'add',this.state.selected)}>Tambah Posisi</Button>
+                            <Button color="primary"
+                                    onClick={(e) => this.handleButtonClick(e, 'add', this.state.selected)}>Tambah
+                                Posisi</Button>
                         </ModalFooter>
                     </Modal>
                     :
@@ -90,11 +103,12 @@ export class CustomModalAddPosition extends Component {
                            className={'modal-lg modal-danger modal-dialog modal-dialog-centered ' + this.props.className}>
                         <ModalHeader toggle={onModalToggle}>Hapus Posisi</ModalHeader>
                         <ModalBody>
-                            <div className="ml-3">Jhon Manembo, <strong>Kolom 4</strong></div>
+                            <div className="ml-3">{memberName}, <strong>{column}</strong></div>
                             <div className="mt-1">
                                 <FormGroup row>
                                     <Col xs="12" md="9">
-                                        <Input type="select" name="selectDel" id="selectDel" onChange={this.handleSelectChange}>
+                                        <Input type="select" name="selectDel" id="selectDel"
+                                               onChange={this.handleSelectChange}>
                                             {this.generatePositionList('del')}
                                         </Input>
                                     </Col>
@@ -102,7 +116,9 @@ export class CustomModalAddPosition extends Component {
                             </div>
                         </ModalBody>
                         <ModalFooter>
-                            <Button color="danger" onClick={(e)=>this.handleButtonClick(e, 'del', this.state.selected)}>Hapus Posisi</Button>
+                            <Button color="danger"
+                                    onClick={(e) => this.handleButtonClick(e, 'del', this.state.selected)}>Hapus
+                                Posisi</Button>
                         </ModalFooter>
                     </Modal>}
             </React.Fragment>
@@ -110,7 +126,6 @@ export class CustomModalAddPosition extends Component {
         );
     }
 }
-
 
 export class CustomModalMemberData extends Component {
 
@@ -345,5 +360,38 @@ export class CustomModalMemberData extends Component {
 
         );
     }
+}
+
+export class CustomModalConfirmation extends Component {
+
+    handleButtonClick = (e, type) => {
+        e.preventDefault()
+        this.props.onModalClose()
+        this.props.onConfirm()
+    }
+
+    render() {
+        const {isOpen, onModalClose, message, title, type} = this.props
+        let modalColor = type === 'del' ? 'danger' : 'primary'
+        return (
+            <React.Fragment>
+                <Modal isOpen={isOpen}
+                       toggle={onModalClose}
+                       className={'modal-lg modal-' + modalColor + ' modal-dialog modal-dialog-centered ' + this.props.className}>
+                    <ModalHeader toggle={onModalClose}>{title}</ModalHeader>
+                    <ModalBody>
+                        <div className="">
+                            <i className="fa fa-lightbulb-o pr-2"/> {message}
+                        </div>
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button color={modalColor} onClick={(e) => this.handleButtonClick(e, type)}>{title}</Button>
+                    </ModalFooter>
+                </Modal>
+            </React.Fragment>
+
+        );
+    }
+
 }
 

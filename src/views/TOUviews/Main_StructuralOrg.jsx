@@ -43,10 +43,7 @@ export class Main_StructuralOrg extends Component {
 
     handleTryAgain = event => {
         event.preventDefault()
-
-
         this.state.env_onTryAgain()
-
     }
 
     fetchStructureOrganizationData = () => {
@@ -55,15 +52,22 @@ export class Main_StructuralOrg extends Component {
             env_isError: false,
             env_error: null,
         })
-        Axios.get(RequestHandler.generateLocalURLFromPath('/panel-structure-organization'), RequestHandler.generateConfigWithParameter({'church_id': 1}))
+        Axios.get(RequestHandler.generateLocalURLFromPath('/panel-structure-organization'),
+            RequestHandler.generateConfigWithParameter({'church_id': 1}))
             .then(res => {
                 let data = res.data.data
-                console.log('get structure organization data')
+                console.log('OK! get structure organization data')
                 console.log(data)
-                this.setState({data, env_isLoading: false, env_isError: false, env_error: null})
+                this.setState({
+                    data:data.rows,
+                    env_positionList: data.churchPositionList,
+                    env_isLoading: false,
+                    env_isError: false,
+                    env_error: null
+                })
             })
             .catch(err => {
-                console.error('error get structure organization data')
+                console.error('ERROR! get structure organization data')
                 console.error(err)
                 this.setState({
                     env_isLoading: false,
@@ -73,37 +77,11 @@ export class Main_StructuralOrg extends Component {
                 })
             })
     }
-
-    fetchPositionList = () => {
-        this.setState({
-            env_isLoading: true,
-            env_isError: false,
-        })
-        Axios.get(RequestHandler.generateLocalURLFromPath('/position-list'))
-            .then(res => {
-                let data = res.data.data
-                console.log('get env position list data')
-                console.log(data)
-                this.setState({env_positionList: data}/*, env_isLoading: false, env_isError: false, env_error: null}*/)
-            })
-            .catch(err => {
-                console.error('error get env position list data')
-                console.error(err)
-                this.setState({
-                    env_isLoading: false,
-                    env_isError: true,
-                    env_error: err,
-                    env_onTryAgain: this.fetchPositionList
-                })
-            })
-    }
-
     componentDidMount() {
         this.fetchStructureOrganizationData()
-        this.fetchPositionList()
     }
 
-    handleOnAlterPosition = (type, index, position, memberId) => {
+    handleOnAlterPosition = (type, index, position, memberId, columnId) => {
         this.setState({
             env_isLoading: true,
             env_isError: false,
@@ -111,7 +89,7 @@ export class Main_StructuralOrg extends Component {
         })
         this.setState({env_isError: false, env_isLoading: true})
             Axios.post(RequestHandler.generateLocalURLFromPath('/panel-structure-organization'),
-                {type, position, member_id: memberId},
+                {type, position, member_id: memberId, column_id:columnId},
                 RequestHandler.generateDefaultConfig())
                 .then(res => {
                     let data = res.data.data
@@ -134,7 +112,7 @@ export class Main_StructuralOrg extends Component {
                         env_isError: true,
                         env_isLoading: false,
                         env_error:err,
-                        env_onTryAgain: () => this.handleOnAlterPosition(type, index, position, memberId)
+                        env_onTryAgain: () => this.handleOnAlterPosition(type, index, position, memberId, columnId)
                     })
                 })
     }
@@ -185,6 +163,7 @@ export class Main_StructuralOrg extends Component {
                                             key={index}
                                             rowIndex={index}
                                             id={e.member_id}
+                                            columnId={e.column_id}
                                             memberName={e.full_name}
                                             column={"Kolom " + e.column}
                                             memberBIPRA={e.BIPRA}
