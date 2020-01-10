@@ -96,7 +96,8 @@ export class CustomOrganizationTableRow extends Component {
                     </div>
                 </td>
                 <td className="text-center">
-                    {positions.map((e,index) => <div key={index}><span className="badge badge-success">{e}</span></div> )}
+                    {positions.map((e, index) => <div key={index}><span className="badge badge-success">{e}</span>
+                    </div>)}
                 </td>
                 <td className="text-center">
                     <div className="mb-2">
@@ -104,7 +105,7 @@ export class CustomOrganizationTableRow extends Component {
                         <CustomModalAddPosition isOpen={this.state.isModalAddOpen}
                                                 isAdding={true}
                                                 memberId={id}
-                                                column ={column}
+                                                column={column}
                                                 memberName={memberName}
                                                 columnId={columnId}
                                                 env_positions={env_positions}
@@ -118,7 +119,7 @@ export class CustomOrganizationTableRow extends Component {
                         <CustomModalAddPosition isOpen={this.state.isModalDelOpen}
                                                 isAdding={false}
                                                 memberId={id}
-                                                column ={column}
+                                                column={column}
                                                 memberName={memberName}
                                                 columnId={columnId}
                                                 env_positions={env_positions}
@@ -144,14 +145,16 @@ export class CustomMemberDataTableRow extends Component {
     render() {
 
         const {
-            degreePre, firstName, middleName, lastName, degreePost,
+            memberId,
+            fullName,
             BIPRA,
             baptizeLetterEntry,
             sidiLetterEntry,
             marriedLetterEntry,
             sex,
-            BOD,
+            DOB,
             age,
+            column,
         } = this.props
 
         let openModal = (type) => {
@@ -188,30 +191,55 @@ export class CustomMemberDataTableRow extends Component {
 
         return (
             <tr>
-                <td className="text-center text-muted">1</td>
+                <td className="text-center">{memberId}</td>
 
                 <td>
-                    <div>Drs. Full Fcking Name, S.Pd, M.Pd</div>
-                    <div className="small "><strong>Pria / Kaum Bapa</strong></div>
-                    <div className="small text-muted">
-                        <span>Baptis</span> <span
-                        className="badge badge-success ml-1 mr-1">&#10003;</span> 2018/1/AOR.TON/SB/331
-                    </div>
-                    <div className="small text-muted">
-                        <span>Sidi</span> <span
-                        className="badge badge-success ml-1 mr-1">&#10003;</span> 2018/1/AOR.TON/SB/331
-                    </div>
-                    <div className="small text-muted">
-                        <span>Nikah</span> <span className="badge badge-danger ml-1 mr-1">&#10005;</span> -
-                    </div>
+                    <div>{fullName}</div>
+                    <div className="small "><strong>{BIPRA}</strong></div>
+                    {baptizeLetterEntry ?
+                        <div className="small text-muted">
+                            <span>Baptis</span>
+                            <span className="badge badge-success ml-1 mr-1">&#10003;</span> {baptizeLetterEntry}
+                        </div>
+                        :
+                        <div className="small text-muted">
+                            <span>Baptis</span>
+                            <span className="badge badge-danger ml-1 mr-1">&#10005;</span> -
+                        </div>
+                    }
+
+                    {sidiLetterEntry ?
+                        <div className="small text-muted">
+                            <span>Sidi</span>
+                            <span className="badge badge-success ml-1 mr-1">&#10003;</span> {sidiLetterEntry}
+                        </div>
+                        :
+                        <div className="small text-muted">
+                            <span>Sidi</span>
+                            <span className="badge badge-danger ml-1 mr-1">&#10005;</span> -
+                        </div>
+                    }
+
+                    {marriedLetterEntry ?
+                        <div className="small text-muted">
+                            <span>Nikah</span>
+                            <span className="badge badge-success ml-1 mr-1">&#10003;</span> {marriedLetterEntry}
+                        </div>
+                        :
+                        <div className="small text-muted">
+                            <span>Nikah</span>
+                            <span className="badge badge-danger ml-1 mr-1">&#10005;</span> -
+                        </div>
+                    }
+
                 </td>
 
                 <td>
-                    <div>Laki - Laki</div>
+                    <div>{sex}</div>
                     <div>
-                        <span className="small text-muted pr-1"><strong>Kolom 4</strong></span>|
-                        <span className="small text-muted pl-1 pr-1">14 November 1988</span>|
-                        <span className="small text-muted pl-1">24 Tahun</span>
+                        <span className="small text-muted pr-1"> <strong>{column}</strong> </span>|
+                        <span className="small text-muted pl-1 pr-1">{DOB}</span>|
+                        <span className="small text-muted pl-1">{age} Tahun</span>
                     </div>
                 </td>
 
