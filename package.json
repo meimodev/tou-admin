@@ -28,6 +28,7 @@
     "enzyme-adapter-react-16": "^1.15.2",
     "flag-icon-css": "^3.4.5",
     "font-awesome": "^4.7.0",
+    "http-status-codes": "^1.4.0",
     "node-sass": "^4.13.0",
     "pdf-viewer-reactjs": "^2.0.1",
     "pdfjs-dist": "^2.2.228",

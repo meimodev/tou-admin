@@ -81,7 +81,7 @@ export class CustomOrganizationTableRow extends Component {
         return (
             <tr>
                 <td className="text-center">
-                    <div className="small text-muted">{id}</div>
+                    <div>{id}</div>
                 </td>
                 <td>
                     <div>{memberName}</div>

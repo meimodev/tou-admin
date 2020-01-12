@@ -1,54 +1,62 @@
-import React, {Component} from "react";
-import {
-    Badge,
-    Button,
-    ButtonDropdown,
-    ButtonGroup,
-    ButtonToolbar,
-    Card,
-    CardBody,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-    Col,
-    Dropdown,
-    DropdownItem,
-    DropdownMenu,
-    DropdownToggle,
-    Progress,
-    Row,
-    Table,
-    Form,
-    FormGroup,
-    Label,
-    Input
-} from "reactstrap";
+import React from "react";
+import {Button, Card,} from "reactstrap";
 import Container from "reactstrap/es/Container";
-
-const protocol = 'http'
-const ipAddress = '192.168.1.137'
-const port = '8000'
-const baseAPIPath = 'api'
+import {Link, Redirect} from "react-router-dom";
+import * as HttpStatus from 'http-status-codes';
 
 const RequestHandlerFunctions = {
+    protocol: 'http',
+    ipAddress: '192.168.1.137',
+    port: '8000',
+    baseAPIPath: 'api',
     token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjQzOWMyNzRmMWIwOTA1NzQ2Njc5NjU4NDRiMGNjMjFkNzhkZTZmMzc5ODEzZGE2ZTgxZjRkMGVkNDY4MjhiNjAyNTQzYzU2ZTdlZWQyNTZiIn0.eyJhdWQiOiIzIiwianRpIjoiNDM5YzI3NGYxYjA5MDU3NDY2Nzk2NTg0NGIwY2MyMWQ3OGRlNmYzNzk4MTNkYTZlODFmNGQwZWQ0NjgyOGI2MDI1NDNjNTZlN2VlZDI1NmIiLCJpYXQiOjE1Nzc0NTA5OTgsIm5iZiI6MTU3NzQ1MDk5OCwiZXhwIjoxNjA5MDczMzk4LCJzdWIiOiI2Iiwic2NvcGVzIjpbXX0.NeJ2jtv1Y42fCElzzoN91zJWEj4GQsfIXCyXhj5Ko8a1c3UVpnRYT9kMPKnIy-zRUHEUf9FfzyY-GabSssYMv43mXWqMPS20VTk95CeielqcmGrMZfN-f-2iqMkAXnh_QkXawlIaX9jR6yKAWfgj0yrPA72JRJpV-od3nMlIwnxCQ4HnMKkKB61gB3Zvv9Iuq2deKxusAILA-jNtKLzBcQ9Kj9xYvMDW8zE05NnaJ2S15hA1tN36NODBN8UQWo05xJOOs85kWjwrPCoNvRdU55sMGrzj3dGcprKkOcfbN72xdE-wI_kDrvvPd27I-tkkBagz0BLvkijY76ucklT7tDSAJxm7zMVsVSYHOIMIqeLT20eXRqErvWks-QZ6yaNOpXSz6sZtOiwUtXLdhVbX2b00hWv7lvMFRaiR6d6BzWGGHuOQXsVM2M6GJ5puRc-IxUt6-_hjKg64KPsikPIdf91O9rc9oXMkaDr087EeatbiN-IfW4fomWLYT_AuODiyNSdVYoLn0EVTQa759R6Oefjosb3iR9_JXTRw6anlkN5L_JMYzIWbZHuRUK0_NtfPw07ROk9qHI9U4IOEGtgHvtIcULdwUbeVJLNqmX9JgzJK1MCO_VCg82O550HwYOBWNJxUfurNnlN-3QL3Vwp2L3xqnyNPnvCXw0AU3IMdypk',
-    generateLocalURLFromPath: function (path) {
-        return protocol + '://' + ipAddress + ':' + port + '/' + baseAPIPath + path
+
+
+    signIn: function (isSignedIn, churchId, churchName, churchKelurahan, authToken) {
+        sessionStorage.setItem('is_signed_in', isSignedIn ? '1' : '')
+        sessionStorage.setItem('church_id', churchId)
+        sessionStorage.setItem('church_name', churchName)
+        sessionStorage.setItem('church_kelurahan', churchKelurahan)
+        sessionStorage.setItem('auth_token', authToken)
+        console.log('signing in !')
     },
+
+    signOut: function () {
+        sessionStorage.clear()
+    },
+
+    isSignedIn: function () {
+        return sessionStorage.getItem('is_signed_in')
+    },
+
+    getSignInData: function () {
+        return {
+            church_id: sessionStorage.getItem('church_id'),
+            church_name: sessionStorage.getItem('church_name'),
+            church_kelurahan: sessionStorage.getItem('church_kelurahan'),
+        }
+    },
+
+    generateLocalURLFromPath: function (path) {
+        return this.protocol + '://' + this.ipAddress + ':' + this.port + '/' + this.baseAPIPath + path
+    },
+
+    /**
+     *@param {object} parameter object use in parameter(key-value)
+     * */
     generateConfigWithParameter: function (parameter) {
         return {
             headers: {
-                'Authorization': 'Bearer ' + this.token
+                'Authorization': 'Bearer ' + sessionStorage.getItem('auth_token')
             },
             params: parameter
-
         }
     },
 
     generateDefaultConfig: function () {
         return {
             headers: {
-                'Authorization': 'Bearer ' + this.token
+                'Authorization': 'Bearer ' + sessionStorage.getItem('auth_token')
             }
         }
     },
@@ -66,29 +74,51 @@ const RequestHandlerFunctions = {
             </Container>
         }
         if (isError) {
-            if (error) console.error(error)
-            return onTryAgain ?
+
+            let errorMessage = '';
+            let buttonFunction;
+            let buttonText;
+            let LinkComponent;
+
+            console.log(error)
+            if (error.message === 'Network Error') {
+                console.log(error.message)
+                errorMessage = 'Koneksi Internet bermasalah ! silahkan coba sesaat lagi'
+                buttonFunction = () => window.location.reload
+                buttonText = 'Muat Kembali'
+            } else {
+                console.log('error from RequestHandlerFunctions with code: ' + error.response.status)
+                if (error.response.status == HttpStatus.UNAUTHORIZED) {
+                    console.log(sessionStorage.getItem('auth_token'))
+                    sessionStorage.clear()
+                    alert('(401) SESI KADALUARSA! anda akan diarahkan ke halaman masuk. Silahkan masuk kembali untuk melanjutkan')
+                    return <Redirect to='login'/>
+                }
+
+                errorMessage = '('+error.response.status+')'+' terjadi kesalahan silahkan coba lagi!'
+                buttonFunction = onTryAgain
+                buttonText = 'Coba Lagi'
+                console.error(error)
+
+            }
+
+            return <React.Fragment>
                 <div className="animated fadeIn">
                     <Card className="pt-3" style={{background: 'transparent', border: 'transparent'}}>
                         <div className="alert alert-warning text-center" role="alert">
-                            <i className="fa fa-warning text-danger pr-1"/> Transfer data bermasalah di karenakan
-                            koneksi jaringan yang kurang baik, silahkan dicoba kembali
+                            <i className="fa fa-warning text-danger pr-1"/> {errorMessage}
                         </div>
-                        <Button color="primary" onClick={onTryAgain}><i className="fa fa-refresh pr-1"/> Coba
-                            lagi</Button>
+                        {LinkComponent ?
+                            LinkComponent
+                            :
+                            <Button color="primary" onClick={buttonFunction}>
+                                <i className="fa fa-refresh pr-1"/>{buttonText}
+                            </Button>
+                        }
                     </Card>
                 </div>
-                :
-                <div className="animated fadeIn">
-                    <Card className="pt-3" style={{background: 'transparent', border: 'transparent'}}>
-                        <div className="alert alert-danger text-center" role="alert">
-                            <i className="fa fa-expand text-danger pr-1"/>
-                            Koneksi Internet bermasalah ! silahkan coba sesaat lagi
-                        </div>
-                        <Button size="sm" color="primary" onClick={()=>window.location.reload()}><i
-                            className="fa expand pr-1"/> Muat Ulang Halaman</Button>
-                    </Card>
-                </div>
+            </React.Fragment>
+
         }
         return onRender
     }

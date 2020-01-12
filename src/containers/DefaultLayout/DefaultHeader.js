@@ -22,6 +22,7 @@ import avatar from "../../assets/img/avatar.png";
 
 import { Redirect } from "react-router-dom";
 import UncontrolledDropdown from "reactstrap/lib/UncontrolledDropdown";
+import RequestHandlerFunctions from "../../views/TOUviews/RequestHandler";
 
 const propTypes = {
   children: PropTypes.node
@@ -39,14 +40,14 @@ class DefaultHeader extends Component {
         <AppSidebarToggler className="d-lg-none" display="md" mobile />
         <AppNavbarBrand
           full={{ src: logo, width: 89, height: 25, alt: "CoreUI Logo" }}
-          minimized={{ src: sygnet, width: 30, height: 30, alt: "CoreUI Logo" }}
+          minimized={{ src: logo, width: 30, height: 30, alt: "CoreUI Logo" }}
         />
         <AppSidebarToggler className="d-md-down-none" display="lg" />
 
         <Nav className="d-md-down-none animated fadeIn" navbar>
           <NavItem className="px-3">
             <NavLink to="/dashboard" className="nav-link">
-              Dashboard
+              <h4>TOU-System Panel</h4>
             </NavLink>
           </NavItem>
           {/* <NavItem className="px-3">
@@ -83,24 +84,23 @@ class DefaultHeader extends Component {
                 className="img-avatar"
                 alt="Alfa Omega Rinegetan"
               /> */}
-              <span className="text-primary">BENDAHARA, </span>
-              <span> Bait'el Omega Rurukan</span>
+              <span>{RequestHandlerFunctions.getSignInData().church_name +', '+RequestHandlerFunctions.getSignInData().church_kelurahan}</span>
               <i className="img-avatar cui-options " />
             </DropdownToggle>
             <DropdownMenu
               right
               style={{ right: "auto", marginTop: "0.5rem" }}
-              className="animated fadeIn"
+              className="animated fadeInBig"
             >
               {/* <DropdownItem header tag="div" className="text-center">
                 <strong>Operasi</strong>
               </DropdownItem> */}
-              <DropdownItem
-                onClick={e => this.props.onRedirectTo(e, "/billing")}
-              >
-                <i className="fa fa-bell-o" /> Pembayaran
-                <Badge color="danger">42</Badge>
-              </DropdownItem>
+              {/*<DropdownItem*/}
+              {/*  onClick={e => this.props.onRedirectTo(e, "/billing")}*/}
+              {/*>*/}
+              {/*  <i className="fa fa-bell-o" /> Pembayaran*/}
+              {/*  <Badge color="danger">42</Badge>*/}
+              {/*</DropdownItem>*/}
               {/* <DropdownItem>
                 <i className="fa fa-envelope-o" /> Messages
                 <Badge color="success">42</Badge>

@@ -18,6 +18,7 @@ import {
 import navigation from "../../_nav";
 // routes config
 import routes from "../../routes";
+import RequestHandlerFunctions from "../../views/TOUviews/RequestHandler";
 
 const DefaultAside = React.lazy(() => import("./DefaultAside"));
 const DefaultFooter = React.lazy(() => import("./DefaultFooter"));
@@ -32,6 +33,7 @@ class DefaultLayout extends Component {
 
     signOut = e => {
         e.preventDefault();
+        RequestHandlerFunctions.signOut()
         this.props.history.push("/login");
     };
 
@@ -46,10 +48,13 @@ class DefaultLayout extends Component {
     // }
 
     render() {
+
+        let isSignedIn = RequestHandlerFunctions.isSignedIn()
+
         return (
             <div className="app">
                 <AppHeader fixed>
-                    <Suspense >
+                    <Suspense>
                         <DefaultHeader
                             onLogout={this.signOut}
                             onRedirectTo={this.handleRedirectTo}
@@ -78,11 +83,15 @@ class DefaultLayout extends Component {
                                                 path={route.path}
                                                 exact={route.exact}
                                                 name={route.name}
-                                                render={props => <route.component {...props} />}
+                                                render={props => isSignedIn?  <route.component {...props} /> : <Redirect to='login'/>
+                                                }
                                             />
                                         ) : null;
                                     })}
-                                    <Redirect from="/" to="/dashboard"/>
+
+                                    {isSignedIn ? <Redirect from="/" to="/dashboard"/> :
+                                        <Redirect from="/" to="/login"/>}
+
                                 </Switch>
                             </Suspense>
                         </Container>

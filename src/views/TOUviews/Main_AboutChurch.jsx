@@ -1,29 +1,19 @@
-import React, {Component, lazy, Suspense} from "react";
+import React, {Component, lazy} from "react";
 import axios from 'axios'
 import RequestHandlerFunctions from './RequestHandler'
 import {
-    Badge,
     Button,
-    ButtonDropdown,
-    ButtonGroup,
-    ButtonToolbar,
     Card,
     CardBody,
     CardFooter,
     CardHeader,
     CardTitle,
     Col,
-    Dropdown,
-    DropdownItem,
-    DropdownMenu,
-    DropdownToggle,
-    Progress,
     Row,
-    Table,
     Form,
     FormGroup,
     Label,
-    Input, InputGroupAddon, InputGroupText, InputGroup, CardGroup
+    Input, InputGroupAddon, InputGroupText, InputGroup
 } from "reactstrap";
 import {CustomModalConfirmation} from "../TOUCustomComponent/CustomModal";
 
@@ -137,7 +127,7 @@ export class Main_AboutChurch extends Component {
     }
 
     handleOnFormSubmit = e => {
-        e.preventDefault()
+        // e.preventDefault()
         this.setState({
             env_isLoading: true,
             env_isError: false,
@@ -145,11 +135,11 @@ export class Main_AboutChurch extends Component {
         })
         //TODO some basic validation perhaps before submiting to server
         axios.post(
-            RequestHandlerFunctions.generateLocalURLFromPath('/panel-dashboard'),
+            RequestHandlerFunctions.generateLocalURLFromPath('/panel-about-church/set'),
             this.state.churchData,
             RequestHandlerFunctions.generateDefaultConfig())
             .then(res => {
-                console.log('post church data')
+                console.log('OK! post church data')
                 console.log(res.data)
                 this.setState({
                     env_isLoading: false,
@@ -194,7 +184,7 @@ export class Main_AboutChurch extends Component {
                 churchData.email = e.target.value
                 break
             case 'address':
-                churchData.name = e.target.value
+                churchData.address = e.target.value
                 break
         }
         this.setState({churchData})
@@ -322,8 +312,8 @@ export class Main_AboutChurch extends Component {
                                         <Label for="exampleText">Alamat detil</Label>
                                         <InputGroup>
                                             <Input type="textarea"
-                                                   name="text"
-                                                   id="exampleText"
+                                                   name="address"
+                                                   id="address"
                                                    value={this.state.churchData.address}
                                                    placeholder="alamat lengkap, contoh: nama jalan, penunjuk sekitar, dll"
                                                    onChange={(e) => this.handleInputChange(e, 'address')}/>

@@ -36,8 +36,10 @@ export class Main_MembersData extends Component {
         rows: [],
         env_currentPage: 1,
         env_perPage: 5,
-        env_minimumButtonsCount: 5,
+        env_minimumIndexButtonsCount: 5,
 
+        env_isPreviousButtonVisible: false,
+        env_isNextButtonVisible: false,
         env_currentLastPage: '',
         env_lastPage: '',
         env_firstPageUrl: '',
@@ -47,11 +49,10 @@ export class Main_MembersData extends Component {
         env_totalItems: '',
         env_indexNextCount: '',
         env_indexJustRendered: '',
+
         env_isLoading: true,
         env_isError: false,
         env_onTryAgain: null,
-        env_isPreviousButtonVisible: false,
-        env_isNextButtonVisible: false,
     }
 
     handleTryAgain = event => {
@@ -91,7 +92,7 @@ export class Main_MembersData extends Component {
                     env_isError: false,
                 })
                 if (!this.state.env_indexJustRendered) {
-                    if (this.state.env_lastPage < this.state.env_minimumButtonsCount) {
+                    if (this.state.env_lastPage < this.state.env_minimumIndexButtonsCount) {
                         this.setState({
                             env_indexNextCount: this.state.env_lastPage,
                             env_indexJustRendered: this.state.env_lastPage,
@@ -99,8 +100,8 @@ export class Main_MembersData extends Component {
                         })
                     } else {
                         this.setState({
-                            env_indexNextCount: this.state.env_minimumButtonsCount,
-                            env_indexJustRendered: this.state.env_minimumButtonsCount,
+                            env_indexNextCount: this.state.env_minimumIndexButtonsCount,
+                            env_indexJustRendered: this.state.env_minimumIndexButtonsCount,
                             env_isNextButtonVisible: true,
                         })
                     }
@@ -157,7 +158,7 @@ export class Main_MembersData extends Component {
             env_isPreviousButtonVisible: true,
         })
 
-        if (pagesLeftToRender <= this.state.env_minimumButtonsCount) this.setState({
+        if (pagesLeftToRender <= this.state.env_minimumIndexButtonsCount) this.setState({
             env_isNextButtonVisible: false
         })
 
@@ -165,15 +166,15 @@ export class Main_MembersData extends Component {
 
     handleOnClickPrevIndexes = (e) => {
         e.preventDefault()
-        if (this.state.env_indexJustRendered - this.state.env_minimumButtonsCount <= 0) {
+        if (this.state.env_indexJustRendered - this.state.env_minimumIndexButtonsCount <= 0) {
             this.setState({
                 env_isPreviousButtonVisible: false,
             })
         }
 
         this.setState({
-            env_currentLastPage: this.state.env_indexJustRendered - this.state.env_minimumButtonsCount,
-            env_indexNextCount: this.state.env_minimumButtonsCount,
+            env_currentLastPage: this.state.env_indexJustRendered - this.state.env_minimumIndexButtonsCount,
+            env_indexNextCount: this.state.env_minimumIndexButtonsCount,
             env_isNextButtonVisible: true,
         })
     }
