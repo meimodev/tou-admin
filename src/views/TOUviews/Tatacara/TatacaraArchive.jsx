@@ -1,21 +1,10 @@
 import React, { Component } from "react";
 import {
-  Badge,
   Button,
-  ButtonDropdown,
-  ButtonGroup,
-  ButtonToolbar,
   Card,
   CardBody,
-  CardFooter,
   CardHeader,
-  CardTitle,
   Col,
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownToggle,
-  Progress,
   Row,
   Table,
   Pagination,
@@ -55,7 +44,7 @@ export class TatacaraArchive extends Component {
                         <span className="small text-muted">Penatua Kolom 2 | Sekertaris Jemaat</span>
                       </td>
                       <td className="text-center">
-                        <Button color="primary"><i className="fa fa-eye mr-1" ariaHidden="true" />lihat</Button>
+                        <Button color="primary"><i className="fa fa-eye mr-1" aria-hidden="true" />lihat</Button>
                       </td>
                     </tr>
                     <tr>
@@ -68,7 +57,7 @@ export class TatacaraArchive extends Component {
                         <span className="small text-muted">Penatua Kolom 2 | Sekertaris Jemaat</span>
                       </td>
                       <td className="text-center">
-                        <Button color="primary"><i className="fa fa-eye mr-1" ariaHidden="true" />lihat</Button>
+                        <Button color="primary"><i className="fa fa-eye mr-1" aria-hidden="true" />lihat</Button>
                       </td>
                     </tr>
                     <tr>
@@ -81,20 +70,20 @@ export class TatacaraArchive extends Component {
                         <span className="small text-muted">Penatua Kolom 2 | Sekertaris Jemaat</span>
                       </td>
                       <td className="text-center">
-                        <Button color="primary"><i className="fa fa-eye mr-1" ariaHidden="true" />lihat</Button>
+                        <Button color="primary"><i className="fa fa-eye mr-1" aria-hidden="true" />lihat</Button>
                       </td>
                     </tr>
                   </tbody>
                 </Table>
                 <Pagination>
-                  <PaginationItem><PaginationLink previous tag="button"></PaginationLink></PaginationItem>
+                  <PaginationItem><PaginationLink previous tag="button"/></PaginationItem>
                   <PaginationItem active>
                     <PaginationLink tag="button">1</PaginationLink>
                   </PaginationItem>
                   <PaginationItem className="page-item"><PaginationLink tag="button">2</PaginationLink></PaginationItem>
                   <PaginationItem><PaginationLink tag="button">3</PaginationLink></PaginationItem>
                   <PaginationItem><PaginationLink tag="button">4</PaginationLink></PaginationItem>
-                  <PaginationItem><PaginationLink next tag="button"></PaginationLink></PaginationItem>
+                  <PaginationItem><PaginationLink next tag="button"/></PaginationItem>
                 </Pagination>
               </CardBody>
             </Card>

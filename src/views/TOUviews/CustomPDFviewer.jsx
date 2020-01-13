@@ -51,8 +51,6 @@ export class CustomPDFviewer extends Component {
                     <i className="cui-lightbulb"/> jika anda menggunakan integrasi IDM (Internet download manager) file akan otomatis terdownload! <br/>
                     jika anda ingin menggunakan fitur bawaan system, silahkan blokir download otomatis di IDM untuk website ini
                 </div>
-
-
             </div>
         )
     };

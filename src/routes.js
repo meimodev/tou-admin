@@ -81,6 +81,7 @@ const SuratArchive = React.lazy(() =>
   import("./views/TOUviews/Surat/SuratArchive")
 );
 
+const PDFTemplateViewer = React.lazy(()=> import('./views/TOUviews/PDF_TemplateViewer'))
 
 const Billing = React.lazy(() => import("./views/TOUviews/Billing"));
 
@@ -235,6 +236,12 @@ const routes = [
     name: "Surat Variation",
     component: SuratVariation
   },
+  {
+    path: '/v',
+    exact: true,
+    name: 'PDF Template Viewer',
+    component: PDFTemplateViewer,
+  }
 ];
 
 export default routes;
