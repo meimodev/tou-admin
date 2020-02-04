@@ -82,13 +82,14 @@ const RequestHandlerFunctions = {
 
             console.log(error)
             if (error.message === 'Network Error') {
-                console.log(error.message)
+                console.log('NETWORK ERROR')
                 errorMessage = 'Koneksi Internet bermasalah ! silahkan coba sesaat lagi'
-                buttonFunction = () => window.location.reload
+                buttonFunction = () => window.location.reload()
                 buttonText = 'Muat Kembali'
             } else {
-                console.log('error from RequestHandlerFunctions with code: ' + error.response.status)
-                if (error.response.status == HttpStatus.UNAUTHORIZED) {
+                if (error.response.status) console.log('error from RequestHandlerFunctions with code: ' + error.response.status)
+
+                if (error.response.status === HttpStatus.UNAUTHORIZED) {
                     console.log(sessionStorage.getItem('auth_token'))
                     sessionStorage.clear()
                     alert('(401) SESI KADALUARSA! anda akan diarahkan ke halaman masuk. Silahkan masuk kembali untuk melanjutkan')
@@ -98,7 +99,6 @@ const RequestHandlerFunctions = {
                 errorMessage = '('+error.response.status+')'+' terjadi kesalahan silahkan coba lagi!'
                 buttonFunction = onTryAgain
                 buttonText = 'Coba Lagi'
-                console.error(error)
 
             }
 

@@ -66,7 +66,6 @@ export class Main_StructuralOrg extends Component {
     }
 
     fetchStructureOrganizationData = (url) => {
-        console.log(url)
         this.setState({
             env_isLoading: true,
             env_isError: false,
@@ -75,51 +74,50 @@ export class Main_StructuralOrg extends Component {
         Axios.get(
             url,
             RequestHandler.generateDefaultConfig())
-            .then(res => {
-                let data = res.data
-                console.log('OK! get structure organization data')
-                console.log(data)
-                this.setState({
-                    env_currentPage: data.data.current_page,
-                    env_lastPage: data.data.last_page,
-                    env_firstPageUrl: data.data.first_page_url,
-                    env_lastPageUrl: data.data.last_page_url,
-                    env_nextPageUrl: data.data.next_page_url,
-                    env_prevPageUrl: data.data.prev_page_url,
-                    env_totalItems: data.data.total,
+        .then(res => {
+            let data = res.data
+            console.log('OK! get structure organization data')
+            this.setState({
+                env_currentPage: data.data.current_page,
+                env_lastPage: data.data.last_page,
+                env_firstPageUrl: data.data.first_page_url,
+                env_lastPageUrl: data.data.last_page_url,
+                env_nextPageUrl: data.data.next_page_url,
+                env_prevPageUrl: data.data.prev_page_url,
+                env_totalItems: data.data.total,
 
-                    rows: data.data.data,
-                    env_positionList: data.data.churchPositionList,
-                    env_isLoading: false,
-                    env_isError: false,
-                    env_error: null,
-                })
-                if (!this.state.env_indexJustRendered) {
-                    if (this.state.env_lastPage < this.state.env_minimumIndexButtonsCount) {
-                        this.setState({
-                            env_indexNextCount: this.state.env_lastPage,
-                            env_indexJustRendered: this.state.env_lastPage,
-                            env_isNextButtonVisible: false,
-                        })
-                    } else {
-                        this.setState({
-                            env_indexNextCount: this.state.env_minimumIndexButtonsCount,
-                            env_indexJustRendered: this.state.env_minimumIndexButtonsCount,
-                            env_isNextButtonVisible: true,
-                        })
-                    }
+                rows: data.data.data,
+                env_positionList: data.data.churchPositionList,
+                env_isLoading: false,
+                env_isError: false,
+                env_error: null,
+            })
+            if (!this.state.env_indexJustRendered) {
+                if (this.state.env_lastPage < this.state.env_minimumIndexButtonsCount) {
+                    this.setState({
+                        env_indexNextCount: this.state.env_lastPage,
+                        env_indexJustRendered: this.state.env_lastPage,
+                        env_isNextButtonVisible: false,
+                    })
+                } else {
+                    this.setState({
+                        env_indexNextCount: this.state.env_minimumIndexButtonsCount,
+                        env_indexJustRendered: this.state.env_minimumIndexButtonsCount,
+                        env_isNextButtonVisible: true,
+                    })
                 }
+            }
+        })
+        .catch(err => {
+            console.error('ERROR! get structure organization data')
+            console.error(err)
+            this.setState({
+                env_isLoading: false,
+                env_isError: true,
+                env_error: err,
+                env_onTryAgain: this.fetchStructureOrganizationData
             })
-            .catch(err => {
-                console.error('ERROR! get structure organization data')
-                console.error(err)
-                this.setState({
-                    env_isLoading: false,
-                    env_isError: true,
-                    env_error: err,
-                    env_onTryAgain: this.fetchStructureOrganizationData
-                })
-            })
+        })
     }
 
     componentDidMount() {
@@ -137,30 +135,33 @@ export class Main_StructuralOrg extends Component {
         Axios.post(RequestHandler.generateLocalURLFromPath('/panel-structure-organization'),
             {type, position, member_id: memberId, column_id: columnId},
             RequestHandler.generateDefaultConfig())
-            .then(res => {
-                let data = res.data.data
-                console.log('OK! altered position of member with ID = ' + memberId)
-                console.log(data)
-                let d = this.state.data[index].positions
-                let stateData = [...this.state.data]
-                stateData[index].positions = data.positions
-                console.log(stateData)
-                this.setState({
-                    env_isError: false,
-                    env_isLoading: false,
-                    env_error: null
-                })
+        .then(res => {
+            let data = res.data.data
+            console.log('OK! altered position of member with ID = ' + memberId)
+            console.log(data)
+
+            this.fetchStructureOrganizationData(
+                RequestHandler.generateLocalURLFromPath(
+                    '/panel-structure-organization/' + this.state.church_id + '?per=' + this.state.env_perPage + '&page=' + this.state.env_currentPage
+                )
+            )
+
+            this.setState({
+                env_isError: false,
+                env_isLoading: false,
+                env_error: null
             })
-            .catch(err => {
-                console.error('ERROR! while altering position ')
-                console.error(err)
-                this.setState({
-                    env_isError: true,
-                    env_isLoading: false,
-                    env_error: err,
-                    env_onTryAgain: () => this.handleOnAlterPosition(type, index, position, memberId, columnId)
-                })
+        })
+        .catch(err => {
+            console.error('ERROR! while altering position ')
+            console.error(err)
+            this.setState({
+                env_isError: true,
+                env_isLoading: false,
+                env_error: err,
+                env_onTryAgain: () => this.handleOnAlterPosition(type, index, position, memberId, columnId)
             })
+        })
     }
 
     generatePaginationIndexes = (indexStart, count) => {
@@ -337,8 +338,9 @@ export class Main_StructuralOrg extends Component {
                                 </Col>
                                 <Col md="2" lg="2">
                                     <div className='my-auto text-primary pt-3 text-center pr-2 border-bottom border-primary'>
-                                        <span className='text-muted'>Halaman </span> <strong>{this.state.env_currentPage}</strong>  <span
-                                        className="text-muted">dari</span> <strong>{this.state.env_lastPage}</strong>
+                                        <span className='text-muted'>Halaman </span> <strong>{this.state.env_currentPage}</strong>
+                                        <span
+                                            className="text-muted">dari</span> <strong>{this.state.env_lastPage}</strong>
                                     </div>
                                 </Col>
                             </Row>

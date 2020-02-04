@@ -41,7 +41,7 @@ const MyDocument = () =>
     <Document>
         <Page size="A4" style={styles.page}>
             <View style={styles.section}>
-                <Text>Section #1 also some text but requre to refresh page</Text>
+                <Text>Section #1 also some text but require to refresh page</Text>
             </View>
             <View style={styles.section}>
                 <Text>Section #2</Text>

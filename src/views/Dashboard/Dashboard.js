@@ -43,6 +43,7 @@ class Dashboard extends Component {
                 phone: '',
                 email: '',
                 address: '',
+                territory: '',
             },
             male: 0,
             female: 0,
@@ -117,7 +118,7 @@ class Dashboard extends Component {
     }
 
     render() {
-        const {name: churchName, kabupaten, kecamatan, kelurahan, phone, email, address} = this.state.church
+        const {name: churchName, kabupaten, kecamatan, kelurahan, phone, email, address, territory} = this.state.church
         const {male, female, pkb, wki, youth, teen, child, baptize, sidi, married, total} = this.state
         const getPercentage = (val) => Math.round((100 * val) / total)
 
@@ -204,6 +205,10 @@ class Dashboard extends Component {
                                             <div>
                                                 <span className="text-muted"> Kelurahan / Desa </span><br/>
                                                 <p className="mt-0">{kelurahan}</p>
+                                            </div>
+                                            <div>
+                                                <span className="text-muted"> Wilayah Pelayanan </span><br/>
+                                                <p className="mt-0">{territory}</p>
                                             </div>
                                             <div>
                                                 <span className="text-muted"> Alamat </span><br/>

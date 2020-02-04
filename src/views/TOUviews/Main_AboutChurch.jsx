@@ -36,6 +36,7 @@ export class Main_AboutChurch extends Component {
             phone: '',
             email: '',
             address: '',
+            territory: '',
         },
         column_count: '',
         columns: [],
@@ -64,62 +65,63 @@ export class Main_AboutChurch extends Component {
             RequestHandlerFunctions.generateConfigWithParameter({
                 'church_id': 1
             }))
-            .then(res => {
-                let data = res.data.data
-                let isDataExist = data.data_exist
-                console.log('OK! get church data')
-                console.log(data)
-                let state = {}
-                if (isDataExist)
-                    state = {
-                        isChurchDataExist: isDataExist,
-                        churchData: {
-                            id: data.church_id,
-                            name: data.name,
-                            kabupaten: data.kabupaten,
-                            kecamatan: data.kecamatan,
-                            kelurahan: data.kelurahan,
-                            phone: data.phone,
-                            email: data.email,
-                            address: data.address,
-                        },
-                        column_count: data.column_count,
-                        columns: data.columns,
-                        env_isLoading: false,
-                        env_isError: false,
-                        env_error: null,
-                    }
-                else
-                    state = {
-                        isChurchDataExist: isDataExist,
-                        churchData: {
-                            id: 0,
-                            name: "",
-                            kabupaten: "",
-                            kecamatan: "",
-                            kelurahan: "",
-                            phone: "",
-                            email: "",
-                            address: "",
-                        },
-                        column_count: data.column_count,
-                        columns: data.columns,
-                        env_isLoading: false,
-                        env_isError: false,
-                        env_error: null,
-                    }
-                this.setState(state)
-            })
-            .catch(err => {
-                console.error('ERROR! get church data')
-                console.error(err)
-                this.setState({
+        .then(res => {
+            let data = res.data.data
+            let isDataExist = data.data_exist
+            console.log('OK! get church data')
+            console.log(data)
+            let state = {}
+            if (isDataExist)
+                state = {
+                    isChurchDataExist: isDataExist,
+                    churchData: {
+                        id: data.church_id,
+                        name: data.name,
+                        kabupaten: data.kabupaten,
+                        kecamatan: data.kecamatan,
+                        kelurahan: data.kelurahan,
+                        phone: data.phone,
+                        email: data.email,
+                        address: data.address,
+                        territory: data.territory,
+                    },
+                    column_count: data.column_count,
+                    columns: data.columns,
                     env_isLoading: false,
-                    env_isError: true,
-                    env_error: err,
-                    env_onTryAgain: this.fetchAboutChurchData(),
-                })
+                    env_isError: false,
+                    env_error: null,
+                }
+            else
+                state = {
+                    isChurchDataExist: isDataExist,
+                    churchData: {
+                        id: 0,
+                        name: "",
+                        kabupaten: "",
+                        kecamatan: "",
+                        kelurahan: "",
+                        phone: "",
+                        email: "",
+                        address: "",
+                    },
+                    column_count: data.column_count,
+                    columns: data.columns,
+                    env_isLoading: false,
+                    env_isError: false,
+                    env_error: null,
+                }
+            this.setState(state)
+        })
+        .catch(err => {
+            console.error('ERROR! get church data')
+            console.error(err)
+            this.setState({
+                env_isLoading: false,
+                env_isError: true,
+                env_error: err,
+                env_onTryAgain: this.fetchAboutChurchData(),
             })
+        })
     }
 
     componentDidMount() {
@@ -138,25 +140,25 @@ export class Main_AboutChurch extends Component {
             RequestHandlerFunctions.generateLocalURLFromPath('/panel-about-church/set'),
             this.state.churchData,
             RequestHandlerFunctions.generateDefaultConfig())
-            .then(res => {
-                console.log('OK! post church data')
-                console.log(res.data)
-                this.setState({
-                    env_isLoading: false,
-                    env_isError: false,
-                    env_error: null,
-                })
+        .then(res => {
+            console.log('OK! post church data')
+            console.log(res.data)
+            this.setState({
+                env_isLoading: false,
+                env_isError: false,
+                env_error: null,
             })
-            .catch(err => {
-                console.error('ERROR! post church data')
-                console.error(err)
-                this.setState({
-                    env_isLoading: false,
-                    env_isError: true,
-                    env_error: err,
-                    env_onTryAgain: this.handleOnFormSubmit
-                })
+        })
+        .catch(err => {
+            console.error('ERROR! post church data')
+            console.error(err)
+            this.setState({
+                env_isLoading: false,
+                env_isError: true,
+                env_error: err,
+                env_onTryAgain: this.handleOnFormSubmit
             })
+        })
 
     }
 
@@ -186,6 +188,8 @@ export class Main_AboutChurch extends Component {
             case 'address':
                 churchData.address = e.target.value
                 break
+            case 'ter': churchData.territory = e.target.value
+                break
         }
         this.setState({churchData})
     }
@@ -199,18 +203,18 @@ export class Main_AboutChurch extends Component {
         axios.post(RequestHandlerFunctions.generateLocalURLFromPath('/panel-about-church'),
             {'church_id': this.state.churchData.id, type},
             RequestHandlerFunctions.generateDefaultConfig())
-            .then(res => {
-                let data = res.data
-                console.log('OK! ' + data.message)
-                console.log(data.data)
-                this.setState({
-                    column_count: data.data.column_count,
-                    columns: data.data.columns,
-                    env_isLoading: false,
-                    env_isError: false,
-                    env_error: null,
-                })
-            }).catch(err => {
+        .then(res => {
+            let data = res.data
+            console.log('OK! ' + data.message)
+            console.log(data.data)
+            this.setState({
+                column_count: data.data.column_count,
+                columns: data.data.columns,
+                env_isLoading: false,
+                env_isError: false,
+                env_error: null,
+            })
+        }).catch(err => {
             console.error('ERROR! while ' + type + 'operation')
             console.error(err)
             this.setState({
@@ -277,6 +281,14 @@ export class Main_AboutChurch extends Component {
                                                id="kelurahanDesa"
                                                value={this.state.churchData.kelurahan}
                                                onChange={(e) => this.handleInputChange(e, 'kel')}/>
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Label for="territory">Wilayah Pelayanan</Label>
+                                        <Input type="text"
+                                               name="territory"
+                                               id="territory"
+                                               value={this.state.churchData.territory}
+                                               onChange={(e) => this.handleInputChange(e, 'ter')}/>
                                     </FormGroup>
                                     <FormGroup>
                                         <Label for="phone">Telepon</Label>
