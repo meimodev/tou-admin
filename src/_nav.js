@@ -38,20 +38,20 @@ export default {
           url: "/warta/preview",
           icon: "cui-magnifying-glass"
         },
-        {
-          name: "Variasi Warta",
-          url: "/warta/variation",
-          icon: "cui-wrench",
-          badge: {
-            variant: "info",
-            text: "PRO"
-          }
-        },
-        {
-          name: "Arsip Warta",
-          url: "/warta/archive",
-          icon: "cui-layers"
-        }
+        // {
+        //   name: "Variasi Warta",
+        //   url: "/warta/variation",
+        //   icon: "cui-wrench",
+        //   badge: {
+        //     variant: "info",
+        //     text: "PRO"
+        //   }
+        // },
+        // {
+        //   name: "Arsip Warta",
+        //   url: "/warta/archive",
+        //   icon: "cui-layers"
+        // }
       ]
     },
     {
@@ -64,25 +64,25 @@ export default {
           url: "/tatacara/sunday-preview",
           icon: "fa fa-star"
         },
-        {
-          name: "Variasi Tatacara",
-          url: "/tatacara/variation",
-          icon: "cui-wrench ",
-          badge: {
-            variant: "info",
-            text: "PRO"
-          }
-        },
+        // {
+        //   name: "Variasi Tatacara",
+        //   url: "/tatacara/variation",
+        //   icon: "cui-wrench ",
+        //   badge: {
+        //     variant: "info",
+        //     text: "PRO"
+        //   }
+        // },
         // {
         //   name: "Ibadah Lainnya",
         //   url: "/tatacara/other-preview",
         //   icon: "icon-star"
         // },
-        {
-          name: "Arsip Tatacara",
-          url: "/tatacara/archive",
-          icon: "cui-layers"
-        }
+        // {
+        //   name: "Arsip Tatacara",
+        //   url: "/tatacara/archive",
+        //   icon: "cui-layers"
+        // }
       ]
     },
     {
@@ -90,20 +90,24 @@ export default {
       url: "/dashboard",
       icon: "icon-doc",
       children: [ 
-        {
-          name: "Variasi Surat",
-          url: "/surat/variation",
-          icon: "cui-wrench ",
-          badge: {
-            variant: "info",
-            text: "PRO"
-          }
-        }, 
+        // {
+        //   name: "Variasi Surat",
+        //   url: "/surat/variation",
+        //   icon: "cui-wrench ",
+        //   badge: {
+        //     variant: "info",
+        //     text: "PRO"
+        //   },
+        // {
+        //   name: "Tinjau Surat",
+        //   url: "/surat/variation",
+        //   icon: "cui-wrench ",
+        // },
         {
           name: "Arsip Surat-surat",
           url: "/surat/archive",
           icon: "cui-layers"
-        }
+        },
       ]
     },
     // {
@@ -122,6 +126,11 @@ export default {
     //       icon: "fa fa-thermometer-4 "
     //     }
     //   ]
+    // },
+    // {
+    //   name: "test PDF",
+    //   url: "/v",
+    //   icon: "icon-drop"
     // },
     {
       title: true,
