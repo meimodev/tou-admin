@@ -21,6 +21,15 @@ import {
 } from "reactstrap";
 import axios from 'axios'
 import RequestHandlerFunctions from "../TOUviews/RequestHandler";
+import Icon from '@mdi/react'
+import {
+    mdiAlphaBCircleOutline,
+    mdiAlphaICircleOutline,
+    mdiAlphaPCircleOutline,
+    mdiAlphaRCircleOutline,
+    mdiAlphaACircleOutline,
+    mdiChurch
+} from '@mdi/js'
 
 const Widget04 = lazy(() => import("../../views/Widgets/Widget04"));
 const Widget03 = lazy(() => import("../../views/Widgets/Widget03"));
@@ -256,8 +265,8 @@ class Dashboard extends Component {
 
                                                 <div className="progress-group">
                                                     <div className="progress-group-header">
-                                                        <i className="icon-globe progress-group-icon"/>
-                                                        <span className="title text-muted">Pria / Kaum Bapa</span>
+                                                        <Icon path={mdiAlphaBCircleOutline} size={1} color="C8CEDB"/>
+                                                        <span className="title text-muted pl-3">Pria / Kaum Bapa</span>
                                                         <span className="ml-auto font-weight-bold ">{pkb}
                                                             <span
                                                                 className="text-muted small ml-1">({getPercentage(pkb)}%)</span>
@@ -273,8 +282,8 @@ class Dashboard extends Component {
                                                 </div>
                                                 <div className="progress-group">
                                                     <div className="progress-group-header">
-                                                        <i className="icon-social-facebook progress-group-icon"/>
-                                                        <span className="title text-muted">Wanita / Kaum Bapa</span>
+                                                        <Icon path={mdiAlphaICircleOutline} size={1} color="C8CEDB"/>
+                                                        <span className="title text-muted pl-3">Wanita / Kaum Ibu</span>
                                                         <span className="ml-auto font-weight-bold mr-1">{wki}
                                                             <span
                                                                 className="text-muted small ml-1">({getPercentage(wki)} %)</span></span>
@@ -289,8 +298,8 @@ class Dashboard extends Component {
                                                 </div>
                                                 <div className="progress-group">
                                                     <div className="progress-group-header">
-                                                        <i className="icon-social-twitter progress-group-icon"/>
-                                                        <span className="title text-muted">Pemuda</span>
+                                                        <Icon path={mdiAlphaPCircleOutline} size={1} color="C8CEDB"/>
+                                                        <span className="title text-muted pl-3">Pemuda</span>
                                                         <span className="ml-auto font-weight-bold mr-1">{youth}
                                                             <span
                                                                 className="text-muted small ml-1">({getPercentage(youth)}%)</span></span>
@@ -305,8 +314,8 @@ class Dashboard extends Component {
                                                 </div>
                                                 <div className="progress-group">
                                                     <div className="progress-group-header">
-                                                        <i className="icon-social-linkedin progress-group-icon"/>
-                                                        <span className="title text-muted">Remaja</span>
+                                                        <Icon path={mdiAlphaRCircleOutline} size={1} color="C8CEDB"/>
+                                                        <span className="title text-muted pl-3">Remaja</span>
                                                         <span className="ml-auto font-weight-bold mr-1">{teen}
                                                             <span
                                                                 className="text-muted small ml-1">({getPercentage(teen)}%)</span></span>
@@ -321,8 +330,8 @@ class Dashboard extends Component {
                                                 </div>
                                                 <div className="progress-group mb-4">
                                                     <div className="progress-group-header">
-                                                        <i className="icon-social-linkedin progress-group-icon"/>
-                                                        <span className="title text-muted">Anak</span>
+                                                        <Icon path={mdiAlphaACircleOutline} size={1} color="C8CEDB"/>
+                                                        <span className="title text-muted pl-3">Anak</span>
                                                         <span className="ml-auto font-weight-bold mr-1">{child}
                                                             <span
                                                                 className="text-muted small ml-1">({getPercentage(child)}%)</span></span>
@@ -373,7 +382,7 @@ class Dashboard extends Component {
                                                             <div
                                                                 className="border p-2 rounded-lg color-primary bg-info">
                                                                 <div>TOTAL</div>
-                                                                <strong>{total}</strong>
+                                                                <strong>{total}</strong> <span className="small">Anggota</span>
                                                             </div>
 
                                                         </Col>
@@ -392,7 +401,7 @@ class Dashboard extends Component {
 
                     <Row>
                         <Col sm="3">
-                            <Widget02 header="Custumer Service" mainText="+62 812 9402" icon="icon-phone"
+                            <Widget02 header="Costumer Service" mainText="+62 812 9402" icon="icon-phone"
                                       color="secondary"
                                       variant="1"/>
                         </Col>

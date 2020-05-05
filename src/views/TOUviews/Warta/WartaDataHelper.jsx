@@ -13,7 +13,7 @@ class WartaDataHelper extends Component {
                 next_sunday: '',
             },
             this_week: {
-                this_sunday: '',
+                week_sunday: '',
                 start: '',
                 end: '',
                 pkb: '',
@@ -26,14 +26,14 @@ class WartaDataHelper extends Component {
                 koord_remaja: '',
                 anak: '',
                 koord_anak: '',
-                sampul_syukur: [],
+                received: [],
                 kolom: [],
             },
             last_sunday: {
                 start: '',
                 end: '',
                 date: '',
-                sampul_syukur: [],
+                on_church: [],
 
                 pelayanan: {
                     dawn: '',
@@ -46,9 +46,14 @@ class WartaDataHelper extends Component {
                     evening: '',
                 },
                 pembangunan: {
-                    dawn: 'a',
-                    morning: 's',
-                    evening: 's',
+                    dawn: '',
+                    morning: '',
+                    evening: '',
+                },
+                extra: {
+                    dawn: '',
+                    morning: '',
+                    evening: '',
                 },
             },
             birthdays: {
@@ -74,7 +79,7 @@ class WartaDataHelper extends Component {
             env_error: null,
         })
         axios.get(
-            RequestHandlerFunctions.generateLocalURLFromPath('/panel-warta-helper/' + 1),
+            RequestHandlerFunctions.generateLocalURLFromPath('/panel-warta-helper/' + sessionStorage.getItem('church_id')),
             RequestHandlerFunctions.generateDefaultConfig())
         .then(res => {
             console.log('OK! server responded')
@@ -152,6 +157,12 @@ class WartaDataHelper extends Component {
                                         <td>{this.state.data.last_sunday.diakonia.dawn}</td>
                                         <td>{this.state.data.last_sunday.diakonia.morning}</td>
                                         <td>{this.state.data.last_sunday.diakonia.evening}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Extra</td>
+                                        <td>{this.state.data.last_sunday.extra.dawn}</td>
+                                        <td>{this.state.data.last_sunday.extra.morning}</td>
+                                        <td>{this.state.data.last_sunday.extra.evening}</td>
                                     </tr>
 
                                     </tbody>
@@ -274,9 +285,9 @@ class WartaDataHelper extends Component {
                                     <Table className='pt-3 mt-3' size='sm'>
                                         <tbody>
                                         {
-                                            this.state.data.last_sunday.sampul_syukur.length > 0
+                                            this.state.data.last_sunday.on_church.length > 0
                                                 ?
-                                                this.state.data.last_sunday.sampul_syukur.map((e, index) =>
+                                                this.state.data.last_sunday.on_church.map((e, index) =>
                                                     <tr key={index}>
                                                         <td>
                                                             {e.description}
@@ -309,9 +320,9 @@ class WartaDataHelper extends Component {
                                     <Table className='pt-3 mt-3' size='sm'>
                                         <tbody>
                                         {
-                                            this.state.data.this_week.sampul_syukur.length > 0
+                                            this.state.data.this_week.received.length > 0
                                                 ?
-                                                this.state.data.this_week.sampul_syukur.map((e, index) =>
+                                                this.state.data.this_week.received.map((e, index) =>
                                                     <tr key={index}>
                                                         <td>
                                                             {e.description}
@@ -365,27 +376,12 @@ class WartaDataHelper extends Component {
                                                         <tr key={index}>
                                                             <td>{e.date}</td>
                                                             <td>{e.full_name}</td>
-                                                            <td className='text-center'>{e.column}</td>
+                                                            <td>{e.column}</td>
                                                         </tr>
                                                     )
                                                 })
                                             }
 
-                                            <tr>
-                                                <td>14-01-1988</td>
-                                                <td>Utu Kalengki</td>
-                                                <td className='text-center'>2</td>
-                                            </tr>
-                                            <tr>
-                                                <td>14-01-1988</td>
-                                                <td>Prof. Dr. Jhon Tretster Manembo, S.Tt, M.Hum, P.HD</td>
-                                                <td className='text-center'>1</td>
-                                            </tr>
-                                            <tr>
-                                                <td>14-01-1988</td>
-                                                <td>Prof. Dr. Jhon Manembo, S.Tt, M.Hum, P.HD</td>
-                                                <td className='text-center'>1</td>
-                                            </tr>
                                             </tbody>
                                         </Table>
                                         :
@@ -400,60 +396,60 @@ class WartaDataHelper extends Component {
                     </Col>
                 </Row>
                 {/*Priest service Area & MTPJ info*/}
-                <Row>
-                    {/*<Col>*/}
-                    {/*    <Card>*/}
-                    {/*        <CardBody>*/}
-                    {/*            <div className='text-right small text-muted'>Sumber: MTPJ 19-25 Januari 2020</div>*/}
-                    {/*            <div className='text-muted'>Tema Bulanan</div>*/}
-                    {/*            <div className='pl-2 pb-1'>Pengharapan Mesianis</div>*/}
-                    {/*            <div className='text-muted'>Tema Mingguan</div>*/}
-                    {/*            <div className='pl-2 pb-1'>Berjuanglah dalam Keselamatan</div>*/}
-                    {/*            <div className='text-muted'>Nas Pembimbing</div>*/}
-                    {/*            <div className='pl-2 pb-1'>Matius 7: 13-14</div>*/}
-                    {/*            <div className='text-muted'>Pembacaan Alkitab</div>*/}
-                    {/*            <div className='pl-2 pb-1'>Lukas 13 : 22-30</div>*/}
-                    {/*        </CardBody>*/}
-                    {/*    </Card>*/}
-                    {/*</Col>*/}
-                    <Col>
-                        <Card>
-                            <CardBody>
-                                <h5>Wilayah Pelayanan Pendeta </h5>
-                                {
-                                    this.state.data.service_areas.length > 0 ?
-                                        <Table>
-                                            <thead>
-                                            <tr>
-                                                <th>Nama</th>
-                                                <th>Wilayah</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            {
-                                                this.state.data.service_areas.map((e, index) => {
-                                                    return (
-                                                        <tr key={index}>
-                                                            <td>{e.full_name}</td>
-                                                            <td>{e.service_area}</td>
-                                                        </tr>
-                                                    )
-                                                })
-                                            }
+                {/*<Row>*/}
+                {/*    /!*<Col>*!/*/}
+                {/*    /!*    <Card>*!/*/}
+                {/*    /!*        <CardBody>*!/*/}
+                {/*    /!*            <div className='text-right small text-muted'>Sumber: MTPJ 19-25 Januari 2020</div>*!/*/}
+                {/*    /!*            <div className='text-muted'>Tema Bulanan</div>*!/*/}
+                {/*    /!*            <div className='pl-2 pb-1'>Pengharapan Mesianis</div>*!/*/}
+                {/*    /!*            <div className='text-muted'>Tema Mingguan</div>*!/*/}
+                {/*    /!*            <div className='pl-2 pb-1'>Berjuanglah dalam Keselamatan</div>*!/*/}
+                {/*    /!*            <div className='text-muted'>Nas Pembimbing</div>*!/*/}
+                {/*    /!*            <div className='pl-2 pb-1'>Matius 7: 13-14</div>*!/*/}
+                {/*    /!*            <div className='text-muted'>Pembacaan Alkitab</div>*!/*/}
+                {/*    /!*            <div className='pl-2 pb-1'>Lukas 13 : 22-30</div>*!/*/}
+                {/*    /!*        </CardBody>*!/*/}
+                {/*    /!*    </Card>*!/*/}
+                {/*    /!*</Col>*!/*/}
+                {/*    <Col>*/}
+                {/*        <Card>*/}
+                {/*            <CardBody>*/}
+                {/*                <h5>Wilayah Pelayanan Pendeta </h5>*/}
+                {/*                {*/}
+                {/*                    this.state.data.service_areas.length > 0 ?*/}
+                {/*                        <Table>*/}
+                {/*                            <thead>*/}
+                {/*                            <tr>*/}
+                {/*                                <th>Nama</th>*/}
+                {/*                                <th>Wilayah</th>*/}
+                {/*                            </tr>*/}
+                {/*                            </thead>*/}
+                {/*                            <tbody>*/}
+                {/*                            {*/}
+                {/*                                this.state.data.service_areas.map((e, index) => {*/}
+                {/*                                    return (*/}
+                {/*                                        <tr key={index}>*/}
+                {/*                                            <td>{e.full_name}</td>*/}
+                {/*                                            <td>{e.service_area}</td>*/}
+                {/*                                        </tr>*/}
+                {/*                                    )*/}
+                {/*                                })*/}
+                {/*                            }*/}
 
-                                            </tbody>
-                                        </Table>
-                                        :
-                                        <div className='mt-3'>
-                                            <div className="alert alert-info">
-                                                Tidak ada Data -_-
-                                            </div>
-                                        </div>
-                                }
-                            </CardBody>
-                        </Card>
-                    </Col>
-                </Row>
+                {/*                            </tbody>*/}
+                {/*                        </Table>*/}
+                {/*                        :*/}
+                {/*                        <div className='mt-3'>*/}
+                {/*                            <div className="alert alert-info">*/}
+                {/*                                Tidak ada Data -_-*/}
+                {/*                            </div>*/}
+                {/*                        </div>*/}
+                {/*                }*/}
+                {/*            </CardBody>*/}
+                {/*        </Card>*/}
+                {/*    </Col>*/}
+                {/*</Row>*/}
             </div>
         );
     }

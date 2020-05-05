@@ -37,7 +37,7 @@ class TatacaraSundayPreview extends Component {
                         <Card>
                             <CardHeader>
                                 <h4>Tatacara Ibadah Minggu</h4>
-                                <span className="text-muted"> Edisi </span><span>Minggu, 19 November 2010</span>
+                                <span className="text-muted"> Edisi </span><span></span>
                             </CardHeader>
                             <CardBody>
                                 <div className='alert alert-warning'>
@@ -49,10 +49,14 @@ class TatacaraSundayPreview extends Component {
                                         </li>
                                     </ul>
                                 </div>
-                                <CustomPDFviewer
-                                    fileUrl="http://startupwoman.org/files/pdf-sample(1).pdf"
-                                    powerPointUrl="http://localhost:3000/assets/pdf/ppt-test.ppt"
-                                />
+                                <div className='alert alert-danger'>
+                                    <i className='fa fa-warning pr-1'/> Fitur ini sedang dalam perbaikan
+
+                                </div>
+                                {/*<CustomPDFviewer*/}
+                                {/*    fileUrl="http://startupwoman.org/files/pdf-sample(1).pdf"*/}
+                                {/*    powerPointUrl="http://localhost:3000/assets/pdf/ppt-test.ppt"*/}
+                                {/*/>*/}
                             </CardBody>
                         </Card>
                     </Col>

@@ -25,12 +25,12 @@ class Login extends Component {
         whatsApp: '0821 - 9009 - 0638',
         phone: '0821 - 9009 - 0638',
 
-        signInMessageDefault: 'Silahkan gunakan email & password akun TOU-System untuk masuk',
-        signInMessage: 'Silahkan gunakan email & password akun TOU-System untuk masuk',
+        signInMessageDefault: 'Silahkan gunakan Nomor Telepon & Kata Sandi / Password akun TOU-System untuk masuk',
+        signInMessage: 'Silahkan gunakan Nomor Telepon & Kata Sandi akun TOU-System untuk masuk',
 
-        inputEmail: '',
-        inputErrorEmail: false,
-        inputIsEmailDisabled: false,
+        inputPhone: '',
+        inputErrorPhone: false,
+        inputIsPhoneDisabled: false,
 
         inputPassword: '',
         inputErrorPass: false,
@@ -43,24 +43,50 @@ class Login extends Component {
 
     handleOnInputChange = (e, type) => {
         let v = e.target.value
-        if (type === 'email') {
-            this.setState({inputEmail: v})
-            if (v.length <= 3 || !v.includes('@') || !v.includes('.')) {
-                let msg = 'Email belum valid'
+        if (type === 'phone') {
+            this.setState({inputPhone: v})
+
+
+            if (!/^\d+$/.test(v)) {
+                let msg = 'Nomor Telepon hanya terdiri dari 0 - 9'
                 this.setState({
-                    inputErrorEmail: true,
+                    inputErrorPhone: true,
                     signInButtonReady: false,
                     signInMessage: msg,
                     inputIsPassDisabled: true
                 })
-            } else {
-                this.setState({
-                    inputErrorEmail: false,
-                    signInButtonReady: true,
-                    signInMessage: this.state.signInMessageDefault,
-                    inputIsPassDisabled: false,
-                })
+                return
             }
+
+            if (!v.startsWith("0")) {
+                let msg = 'Nomor Telepon harus dimulai dengan angka 0'
+                this.setState({
+                    inputErrorPhone: true,
+                    signInButtonReady: false,
+                    signInMessage: msg,
+                    inputIsPassDisabled: true
+                })
+                return
+            }
+
+            // if (v.length < 11) {
+            //     let msg = 'Nomor Telepon harus berjumlah lebih dari 10 angka'
+            //     this.setState({
+            //         inputErrorPhone: true,
+            //         signInButtonReady: false,
+            //         signInMessage: msg,
+            //         inputIsPassDisabled: true
+            //     })
+            //     return
+            // }
+
+            this.setState({
+                inputErrorPhone: false,
+                signInButtonReady: true,
+                signInMessage: this.state.signInMessageDefault,
+                inputIsPassDisabled: false,
+            })
+
         } else {
             this.setState({inputPassword: v})
             if (v.length < 1) {
@@ -69,14 +95,14 @@ class Login extends Component {
                     inputErrorPass: true,
                     signInButtonReady: false,
                     signInMessage: msg,
-                    inputIsEmailDisabled: true
+                    inputIsPhoneDisabled: true
                 })
             } else {
                 this.setState({
                     inputErrorPass: false,
                     signInButtonReady: true,
                     signInMessage: this.state.signInMessageDefault,
-                    inputIsEmailDisabled: false,
+                    inputIsPhoneDisabled: false,
                 })
             }
         }
@@ -91,10 +117,10 @@ class Login extends Component {
     handleOnButtonSignIn = e => {
         e.preventDefault()
 
-        if (!this.state.inputEmail) {
-            let msg = 'Email tidak boleh kosong'
+        if (!this.state.inputPhone) {
+            let msg = 'Nomor Telepon tidak boleh kosong'
             this.setState({
-                inputErrorEmail: true,
+                inputErrorPhone: true,
                 signInButtonReady: false,
                 signInMessage: msg,
                 inputIsPassDisabled: true
@@ -108,44 +134,44 @@ class Login extends Component {
                 inputErrorPass: true,
                 signInButtonReady: false,
                 signInMessage: msg,
-                inputIsEmailDisabled: true
+                inputIsPhoneDisabled: true
             })
             return
         }
 
-        this.signIn(this.state.inputEmail, this.state.inputPassword)
+        this.signIn(this.state.inputPhone, this.state.inputPassword)
 
     }
 
-    signIn = (email, password) => {
+    signIn = (phone, password) => {
 
         this.setState({isLoading: true})
 
         axios.post(RequestHandlerFunctions.generateLocalURLFromPath('/panel-dashboard'),
-            {email: this.state.inputEmail, password: this.state.inputPassword},
+            {phone: this.state.inputPhone, password: this.state.inputPassword},
             RequestHandlerFunctions.generateDefaultConfig())
-            .then(res => {
-                let data = res.data
-                this.setState({isLoading: false})
-                console.log(data)
-                if (data.error) {
-                    this.setState({
-                        signInMessage: data.message
-                    })
-                } else {
-                    RequestHandlerFunctions.signIn(
-                        true,
-                        data.data.church_id,
-                        data.data.church_name,
-                        data.data.church_kelurahan,
-                        data.data.auth_token,
-                    )
+        .then(res => {
+            let data = res.data
+            this.setState({isLoading: false})
+            console.log(data)
+            if (data.error) {
+                this.setState({
+                    signInMessage: data.message
+                })
+            } else {
+                RequestHandlerFunctions.signIn(
+                    true,
+                    data.data.church_id,
+                    data.data.church_name,
+                    data.data.church_kelurahan,
+                    data.data.auth_token,
+                )
 
-                    this.setState({
-                        isSignedIn: RequestHandlerFunctions.isSignedIn()
-                    })
-                }
-            }).catch(err => {
+                this.setState({
+                    isSignedIn: RequestHandlerFunctions.isSignedIn()
+                })
+            }
+        }).catch(err => {
             console.log(err)
         })
     }
@@ -247,26 +273,26 @@ class Login extends Component {
                                                             <InputGroup className="mb-3">
                                                                 <InputGroupAddon addonType="prepend">
                                                                     <InputGroupText>
-                                                                        <i className="icon-envelope"/>
+                                                                        <i className="icon-phone"/>
                                                                     </InputGroupText>
                                                                 </InputGroupAddon>
-                                                                {this.state.inputErrorEmail ?
+                                                                {this.state.inputErrorPhone ?
                                                                     <Input type="text"
-                                                                           placeholder="Email"
+                                                                           placeholder="Nomor Telepon"
                                                                            invalid
-                                                                           disabled={this.state.inputIsEmailDisabled}
+                                                                           disabled={this.state.inputIsPhoneDisabled}
                                                                            onKeyPress={this.handleOnKeyPressed}
-                                                                           onChange={(e) => this.handleOnInputChange(e, 'email')}
-                                                                           value={this.state.inputEmail}
-                                                                           autoComplete="username"/>
+                                                                           onChange={(e) => this.handleOnInputChange(e, 'phone')}
+                                                                           value={this.state.inputPhone}
+                                                                           autoComplete="phone"/>
                                                                     :
                                                                     <Input type="text"
-                                                                           placeholder="Email"
-                                                                           disabled={this.state.inputIsEmailDisabled}
+                                                                           placeholder="Nomor Telepon"
+                                                                           disabled={this.state.inputIsPhoneDisabled}
                                                                            onKeyPress={this.handleOnKeyPressed}
-                                                                           onChange={(e) => this.handleOnInputChange(e, 'email')}
-                                                                           value={this.state.inputEmail}
-                                                                           autoComplete="username"/>
+                                                                           onChange={(e) => this.handleOnInputChange(e, 'phone')}
+                                                                           value={this.state.inputPhone}
+                                                                           autoComplete="phone"/>
                                                                 }
                                                             </InputGroup>
                                                             <InputGroup className="mb-3">
@@ -278,7 +304,7 @@ class Login extends Component {
 
                                                                 {this.state.inputErrorPass ?
                                                                     <Input type="password"
-                                                                           placeholder="Sandi"
+                                                                           placeholder="Kata Sanddi / Password"
                                                                            invalid
                                                                            disabled={this.state.inputIsPassDisabled}
                                                                            onKeyPress={this.handleOnKeyPressed}
@@ -287,7 +313,7 @@ class Login extends Component {
                                                                            autoComplete="current-password"/>
                                                                     :
                                                                     <Input type="password"
-                                                                           placeholder="Sandi"
+                                                                           placeholder="Kata Sandi / Password"
                                                                            disabled={this.state.inputIsPassDisabled}
                                                                            onKeyPress={this.handleOnKeyPressed}
                                                                            onChange={(e) => this.handleOnInputChange(e, 'password')}
@@ -339,9 +365,10 @@ class Login extends Component {
                                         {this.displayInfoCard(this.state.typeInfoCard)}
 
                                     </CardGroup>
-                                    <div className='small text-center text-muted ml-5'>
-                                        <span className='ml-4'>Awesomely Possible <span
-                                            className='text-primary'>MEIMO</span>&copy; thanks to CORE UI React</span>
+                                    <div className='small text-muted '>
+                                        <span> Awesomely Possible
+                                            <strong className='text-primary'> MEIMO </strong>&#128526; thanks <a target="_blank" href="https://coreui.io/pro/react/"> CORE UI React </a>
+                                        </span>
                                     </div>
                                 </Col>
                             </Row>

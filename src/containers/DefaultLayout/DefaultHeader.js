@@ -16,13 +16,15 @@ import {
   AppNavbarBrand,
   AppSidebarToggler
 } from "@coreui/react";
-import logo from "../../assets/img/brand/logo.svg";
-import sygnet from "../../assets/img/brand/sygnet.svg";
+import logoMin from "../../assets/img/brand/logo_min.svg";
+import logoFull from "../../assets/img/brand/logo_full.png";
 import avatar from "../../assets/img/avatar.png";
 
 import { Redirect } from "react-router-dom";
 import UncontrolledDropdown from "reactstrap/lib/UncontrolledDropdown";
 import RequestHandlerFunctions from "../../views/TOUviews/RequestHandler";
+import Icon from "@mdi/react";
+import {mdiChurch, mdiCog} from "@mdi/js";
 
 const propTypes = {
   children: PropTypes.node
@@ -39,8 +41,8 @@ class DefaultHeader extends Component {
       <React.Fragment>
         <AppSidebarToggler className="d-lg-none" display="md" mobile />
         <AppNavbarBrand
-          full={{ src: logo, width: 89, height: 25, alt: "CoreUI Logo" }}
-          minimized={{ src: logo, width: 30, height: 30, alt: "CoreUI Logo" }}
+          full={{ src: logoFull, width: 90, height: 90, alt: "TOU Logo Full" }}
+          minimized={{ src: logoMin, width: 30, height: 30, alt: "TOU Logo Min" }}
         />
         <AppSidebarToggler className="d-md-down-none" display="lg" />
 
@@ -84,8 +86,12 @@ class DefaultHeader extends Component {
                 className="img-avatar"
                 alt="Alfa Omega Rinegetan"
               /> */}
-              <span>{RequestHandlerFunctions.getSignInData().church_name +', '+RequestHandlerFunctions.getSignInData().church_kelurahan}</span>
-              <i className="img-avatar cui-options " />
+              <div>
+              <Icon path={mdiChurch} size={1} />
+              <span className="ml-2 mr-2">Jemaat {RequestHandlerFunctions.getSignInData().church_name +', '+RequestHandlerFunctions.getSignInData().church_kelurahan}</span>
+                <Icon path={mdiCog} size={1} />
+
+              </div>
             </DropdownToggle>
             <DropdownMenu
               right
@@ -132,7 +138,7 @@ class DefaultHeader extends Component {
               </DropdownItem> */}
               {/* <DropdownItem divider /> */}
               <DropdownItem onClick={e => this.props.onLogout(e)}>
-                <i className="fa fa-lock" /> Keluar
+                <i className="text-primary cui-account-logout" /> Keluar
               </DropdownItem>
             </DropdownMenu>
           </UncontrolledDropdown>

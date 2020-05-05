@@ -341,7 +341,7 @@ export class Main_AboutChurch extends Component {
                                 <div>
                                     <Button color="primary"
                                             onClick={() => this.setState({isModalConfirmationSaveDataColumnOpen: true})}>
-                                        <i className="fa fa-save pr-1"/>Simpan Tentang Gereja
+                                        <i className="fa fa-check pr-1"/>Simpan Tentang Gereja
                                     </Button>
                                     <CustomModalConfirmation
                                         isOpen={this.state.isModalConfirmationSaveDataColumnOpen}
