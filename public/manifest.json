@@ -1,6 +1,6 @@
 {
-  "short_name": "CoreUI-React",
-  "name": "CoreUI-React sample",
+  "short_name": "TOU-panel",
+  "name": "Tou-system church operation panel",
   "icons": [
     {
       "src": "./assets/img/favicon.png",
