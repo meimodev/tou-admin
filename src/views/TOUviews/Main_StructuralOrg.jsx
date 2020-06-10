@@ -76,7 +76,6 @@ export class Main_StructuralOrg extends Component {
             RequestHandler.generateDefaultConfig())
         .then(res => {
             let data = res.data
-            console.log('OK! get structure organization data')
             this.setState({
                 env_currentPage: data.data.current_page,
                 env_lastPage: data.data.last_page,
@@ -109,8 +108,6 @@ export class Main_StructuralOrg extends Component {
             }
         })
         .catch(err => {
-            console.error('ERROR! get structure organization data')
-            console.error(err)
             this.setState({
                 env_isLoading: false,
                 env_isError: true,
@@ -131,14 +128,12 @@ export class Main_StructuralOrg extends Component {
             env_isError: false,
             env_error: null,
         })
-        this.setState({env_isError: false, env_isLoading: true})
+        // this.setState({env_isError: false, env_isLoading: true})
         Axios.post(RequestHandler.generateLocalURLFromPath('/panel-structure-organization'),
             {type, position, member_id: memberId, column_id: columnId},
             RequestHandler.generateDefaultConfig())
         .then(res => {
             let data = res.data.data
-            console.log('OK! altered position of member with ID = ' + memberId)
-            console.log(data)
 
             this.fetchStructureOrganizationData(
                 RequestHandler.generateLocalURLFromPath(
@@ -153,8 +148,6 @@ export class Main_StructuralOrg extends Component {
             })
         })
         .catch(err => {
-            console.error('ERROR! while altering position ')
-            console.error(err)
             this.setState({
                 env_isError: true,
                 env_isLoading: false,

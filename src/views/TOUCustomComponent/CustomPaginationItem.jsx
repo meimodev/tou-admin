@@ -12,7 +12,7 @@ class CustomPaginationItem extends Component {
         let render = this.props.isActive ?
             <PaginationItem key={this.props.pageNumber} active className={className}>
                 <PaginationLink onClick={(e) => this.props.onIndexClicked(e, this.props.pageNumber)}>
-                    {console.log('pageNumber ' + this.props.pageNumber + ' is active')}
+                    {/*{console.log('pageNumber ' + this.props.pageNumber + ' is active')}*/}
                     {this.props.pageNumber}
                 </PaginationLink>
             </PaginationItem>

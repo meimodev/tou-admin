@@ -82,9 +82,6 @@ class WartaDataHelper extends Component {
             RequestHandlerFunctions.generateLocalURLFromPath('/panel-warta-helper/' + sessionStorage.getItem('church_id')),
             RequestHandlerFunctions.generateDefaultConfig())
         .then(res => {
-            console.log('OK! server responded')
-            console.log(res.data.data)
-
             this.setState({
                 data: res.data.data,
                 env_isLoading: false,
@@ -92,11 +89,10 @@ class WartaDataHelper extends Component {
                 env_onTryAgain: null,
                 env_error: null,
             })
-
-            this.props.onNextSundayDateReceived(this.state.data.this_week.this_sunday)
+            this.props.onNextSundayDateReceived(res.data.data.next_week.next_sunday)
         })
         .catch(err => {
-            console.log('ERROR! server responded error')
+            // console.log('ERROR! server responded error')
             this.setState({
                 env_isLoading: false,
                 env_isError: true,

@@ -34,6 +34,7 @@ class WartaPreview extends Component {
     }
 
     handleOnNextSundayDateReceived = (next_sunday) =>{
+        console.log('next sunday received '+next_sunday)
         this.setState({next_sunday: next_sunday})
     }
 
@@ -63,7 +64,7 @@ class WartaPreview extends Component {
 
                                 <div className='alert alert-danger'>
                                     <i className='fa fa-warning text-danger pr-1'/> AKAN SEGERA HADIR! fitur automasi pembuatan
-                                    warta jemaat <i className='fa fa-warning text-danger pr-1'/> berikut data yang sekiranya bisa
+                                    warta jemaat <i className='fa fa-warning text-danger pr-1'/>tapi sebelumnya, berikut data yang sekiranya bisa
                                     membantu dalam pembuatan warta jemaat
                                 </div>
 
