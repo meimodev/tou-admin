@@ -407,7 +407,7 @@ class Dashboard extends Component {
                         </Col>
 
                         <Col sm="3">
-                            <Widget02 header="WhatsApp" mainText="+62 812 9402" icon="fa fa-whatsapp" color="success"
+                            <Widget02 header="WhatsApp" mainText="+62 821 9009 0638" icon="fa fa-whatsapp" color="success"
                                       variant="1"/>
                         </Col>
 

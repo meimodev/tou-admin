@@ -352,7 +352,19 @@ class Login extends Component {
                                                                         outline
                                                                         color="primary"
                                                                         onClick={this.handleSignUp}
-                                                                        className="px-4">Daftar</Button>
+                                                                        className="px-4">Daftar
+                                                                    </Button>
+
+                                                                </Col>
+                                                            </Row>
+                                                            <Row className='mt-2'>
+                                                                <Col>
+                                                                    <a
+                                                                        href="https://play.google.com/store/apps/details?id=com.meimodev.sitouhandler"
+                                                                        target="_blank"
+                                                                        rel="noopener noreferrer">
+                                                                        <i className="fa fa-play pl-1"/> Android App
+                                                                    </a>
                                                                 </Col>
                                                             </Row>
                                                         </React.Fragment>
@@ -367,7 +379,7 @@ class Login extends Component {
                                     </CardGroup>
                                     <div className='small text-muted '>
                                         <span> Awesomely Possible
-                                            <strong className='text-primary'> MEIMO </strong>&#128526; thanks <a target="_blank" href="https://coreui.io/pro/react/"> CORE UI React </a>
+                                            <strong className='text-primary'> MEIMO </strong>&#128526; thanks <a target="_blank" rel="noopener noreferrer" href="https://coreui.io/pro/react/"> CORE UI React </a>
                                         </span>
                                     </div>
                                 </Col>
