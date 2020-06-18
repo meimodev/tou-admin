@@ -389,16 +389,13 @@ class Dashboard extends Component {
                                                     </Row>
                                                 </div>
                                             </ul>
-
                                         </Col>
                                     </Row>
                                 </CardBody>
-
                             </Card>
                         </Col>
 
                     </Row>
-
                     <Row>
                         <Col sm="3">
                             <Widget02 header="Costumer Service" mainText="+62 812 9402" icon="icon-phone"
