@@ -5,10 +5,10 @@ import {Link, Redirect} from "react-router-dom";
 import * as HttpStatus from 'http-status-codes';
 
 const RequestHandlerFunctions = {
-    protocol: 'http',
+    protocol: 'https',
     // protocol: 'https',
     // ipAddress: '192.168.1.5',
-    ipAddress: '35.240.166.175',
+    ipAddress: 'tousystem.com',
     // port: '8000',
     port: '',
     baseAPIPath: 'api',
